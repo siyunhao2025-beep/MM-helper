@@ -20,6 +20,13 @@
 ## 有效命令（实际可运行）
 
 - MCP 调用：经 WorkBuddy 连接器（配置见 mcp-config.example.json，Token 环境变量注入）
+- 推送仓库（E10 实测通过，2026-10-09）：
+  ```bash
+  rm -f "C:/Users/ASUS/AppData/Local/Programs/WorkBuddy/resources/vendor/PortableGit/etc/gitconfig.lock"
+  GIT_TERMINAL_PROMPT=0 GCM_INTERACTIVE=never GCM_GUI_PROMPT=false \
+    git -c credential.helper=manager -c http.proxy=http://127.0.0.1:7897 push origin main
+  ```
+  （GitHub MCP 连接器只有读权限；helper-selector 在此环境会挂起，勿用默认配置推送）
 - 本地开发与测试命令：待 src/ 建立后在此登记（现在没有，不编造）
 
 ## 硬边界
