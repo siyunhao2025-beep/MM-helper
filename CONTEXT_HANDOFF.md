@@ -1,30 +1,38 @@
 # CONTEXT_HANDOFF
 
-项目：慢慢点
-实际项目路径：https://github.com/siyunhao2025-beep/MM-helper（main 分支；本地克隆 C:\Users\ASUS\WorkBuddy\2026-10-09-15-33-59\MM-helper）
-主提示词路径与版本：C:\Users\ASUS\Desktop\慢慢点_WorkBuddy完整执行提示词_单文件版.md；单文件整合版 v1.0；SHA-256 658b016c3be2c3ab1579586931e255ce011b6213fe34a00dd1d297acfd2c2fa6；仓库内逐字节存档待完成（P4 前，校验后入库）
-当前主工作包：P1 — 真实只读链之上的可访问核心（src/core 共享草稿 + 文字/大字/读屏界面 + 未下单沟通卡 + 报价快照）
+项目：慢慢点（ManManDian）
 
-已完成且有证据：
-- R02 只读链 VERIFIED_LIVE_READ（docs/EVIDENCE_LEDGER.jsonl E1–E6，范围=珠海1440032/默认配置）
-- R01/R21/R22 治理与规则文件入库（宪法/需求锁定/状态/决定/交接/.codebuddy 规则）
-- R20 部分：官方声明原文入库；workbuddy.md 为摘要版
+主仓库：<https://github.com/siyunhao2025-beep/MM-helper>（main）
 
-未完成/失败/未知：
-- 源代码（src/）未建；无任何自动测试
-- S4–S10 官方文档未读；读屏实测未测；手语 S1 无模型（BLOCKED）
-- 参赛资格需用户确认（规则要求中国大陆地区合法居民）
-- 澳门是否在 mcd.cn 服务区：未知
-- GitHub MCP 连接器写权限 403（已改走本机 git 通道推送，成功）
+主提示词：`慢慢点_WorkBuddy完整执行提示词_单文件版.md` v1.0；历史记录 SHA-256 `658b016c3be2c3ab1579586931e255ce011b6213fe34a00dd1d297acfd2c2fa6`；仓库内逐字节存档仍待完成
 
-最近实际执行：
-- 真实 MCP 调用×6（traceId 见证据台账）；官方仓库三文件核验（SHA 见 SOURCE_REGISTER）
-- 仓库推送：P0 建档两个提交（根文件+治理；skills+docs）
+## 当前结论
 
-下一条动作：创建 src/core/（草稿模型、整数分金额、快照失效逻辑）与最小可访问界面，配套 tests/
+- README 与运行 Skill 已于 2026-10-09 完成整体重构；主视觉改为麦当劳汉堡、薯条、麦乐鸡与饮料菜单，但不使用官方 Logo 或包装。
+- 麦当劳 MCP 官方服务范围已核验为中国大陆地区，不含港澳台；旧“澳门未知”结论已删除。
+- Token 与个人会员账号绑定，只能本人、非商业、正常交互使用；不得企业代客、商业运营、批量、高频或无人值守调用。
+- 旧“参赛者必须年满 18 岁”结论已更正：未满 18 岁但取得父母或法定监护人同意者可参加。
+- `.codebuddy/skills/manmandian/SKILL.md` 已通过结构校验，但尚未在干净 WorkBuddy 环境完成自动触发与端到端复测。
+- 真实 MCP 只读链证据仍是 2026-10-09 的有限范围历史记录 E1–E6；本轮没有使用用户 Token 重跑。
 
-本轮修改的要求/决定：D001–D005（见 DECISIONS.md）
+## 未完成
 
-授权边界：仅授权向本仓库推送开发内容；未授权真实交易/付费/发布报名/外联/公开部署
+- `src/`、独立界面、自动测试均未建立。
+- 读屏、键盘、大字、窄屏均未实测。
+- `workbuddy.md` 仍为摘要版，专项奖励材料存在核验风险。
+- 手语 S1 无合法模型、词表与真实共创，保持 BLOCKED。
+- LICENSE 未选择；主提示词原文未入库。
+- 企业或商业部署未获授权。
 
-恢复核对：requirements.lock.json 状态、docs/MCP_CAPABILITY_MATRIX.md、本文件指向的真实代码
+## 下一条动作
+
+进入 P1：实现共享草稿、整数分金额、报价快照失效、未下单沟通卡和最小可访问界面，先用 fixture 跑通自动测试，再在获得具体授权时做有限 live 只读复测。
+
+## 恢复顺序
+
+1. 读 `PROJECT_CONSTITUTION.md` 与 `PROJECT_STATUS.md`
+2. 读本文件与 `DECISIONS.md` 的最新决定
+3. 读 `.codebuddy/skills/manmandian-builder/references/sources.md`
+4. 核对实际文件、Git 状态与 `docs/EVIDENCE_LEDGER.jsonl`；文档自述不能替代代码和测试
+
+授权边界：本轮仅授权仓库内容优化与推送；未授权真实交易、报名发布、企业部署或外联。

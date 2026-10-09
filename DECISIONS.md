@@ -24,4 +24,15 @@
 ## D005 · 2026-10-09 · 官方规则差异处理
 - **事实**：官方 README 必交文件表未列 mcp-config.example.json，而 activityGuidelines 列为必须。
 - **决定**：按更完整的 activityGuidelines 执行（提供该文件）。
-- **来源**：DOC_CONFIRMED（两文件 SHA 见 docs/SOURCE_REGISTER.md）。
+- **来源**：DOC_CONFIRMED（两文件 SHA 见 `.codebuddy/skills/manmandian-builder/references/sources.md`）。
+
+## D006 · 2026-10-09 · 官方范围、资格与商业边界纠错
+- **事实**：麦当劳 MCP 官方指南与服务规则明确服务面向中国大陆地区、不含港澳台；Token 与个人会员账号强绑定，授权限于个人、不可转让、非商业使用，并禁止代客牟利、批量高频和自动化调用。比赛规则允许未满 18 岁者在取得父母或法定监护人同意后参加。
+- **决定**：删除“澳门服务区未知”和“参赛者必须 ≥18 岁”的旧结论；企业价值仅作为设计与待验证指标，个人 Token 永不接入企业代客或商业流程。
+- **来源**：DOC_CONFIRMED（sources.md S2/S4/S5）。
+
+## D007 · 2026-10-09 · README、运行 Skill 与主视觉整体重构
+- **依据**：用户明确要求项目接地气、为人民服务、有创意、有深度、有温度、有技术，同时帮助个人与企业，并直接授权上传优化内容。
+- **决定**：README 作为公共项目门面，运行 `SKILL.md` 作为智能体执行规则，二者分工；README 不替代 Skill。新增 16:9 原创概念主视觉，菜单使用麦当劳汉堡、薯条、麦乐鸡与饮料语义，不使用官方 Logo、真实顾客或背书暗示。
+- **验证**：运行 Skill 通过结构校验；图片为 1672×941；完整 WorkBuddy 触发、辅助技术和用户任务仍待实测。
+- **来源**：USER_PROVIDED + TEST_OBSERVED + DESIGN_PROPOSAL。

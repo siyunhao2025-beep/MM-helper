@@ -12,7 +12,7 @@
 
 - 2026-10-09 15:34 — 真实调用 query-my-account（traceId f2a5c0be25b8b87ee1289978062e426d），确认账户积分状态
 - 2026-10-09 17:05 — 真实只读链五环调用：query-nearby-stores / query-meals / query-meal-detail / query-store-coupons / calculate-price（traceId 见 docs/EVIDENCE_LEDGER.jsonl E2–E6）
-- 2026-10-09 17:35 — 核验官方仓库 M-China/mcd-developer-innovation-challenge 的 README.md / activityGuidelines.md / CONTEST_DECLARATION.md（SHA 见 docs/SOURCE_REGISTER.md）
+- 2026-10-09 17:35 — 核验官方仓库 M-China/mcd-developer-innovation-challenge 的 README.md / activityGuidelines.md / CONTEST_DECLARATION.md（来源登记现位于 `.codebuddy/skills/manmandian-builder/references/sources.md`）
 - 2026-10-09 17:45 — 本仓库 P0 建档推送（治理文件、官方声明原文、MCP 集成说明、能力矩阵、证据台账）
 
 ## 需求来源

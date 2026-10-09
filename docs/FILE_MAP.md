@@ -6,7 +6,7 @@
 
 | 路径 | 用途 | 状态 |
 |---|---|---|
-| README.md | 项目介绍/安装/使用/状态 | ✅ |
+| README.md | 项目介绍/诗歌/真实状态/安装/使用/合规/上传 | ✅ 已整体重构（2026-10-09） |
 | CONTEST_DECLARATION.md | 官方参赛声明（原文） | ✅ |
 | MCP_INTEGRATION.md | MCP 集成说明（比赛必交） | ✅ |
 | mcp-config.example.json | 脱敏配置示例 | ✅ |
@@ -38,12 +38,13 @@
 | EVIDENCE_LEDGER.jsonl | ✅ |
 | FILE_MAP.md | ✅（本文件） |
 | KNOWN_LIMITATIONS.md | ✅ |
-| SOURCE_REGISTER.md | 并入 builder references/sources.md（含 SHA） |
+| SOURCE_REGISTER.md | 未单独建文件；来源登记位于 `.codebuddy/skills/manmandian-builder/references/sources.md`（含当前 SHA/版本） |
 | FEATURE_STATUS.md / ACCESSIBILITY.md / ACCESSIBILITY_TEST_REPORT.md / SIGN_LANGUAGE_MODEL_CARD.md / DATA_AND_CONSENT.md / TEST_REPORT.md / USER_VALUE_EVALUATION.md / DEMO_SCRIPT.md / SUBMISSION_CHECKLIST.md | 待建（按阶段） |
 
-## src/ 与 tests/ 与 assets/（目标结构）
+## src/、tests/ 与 assets/
 
-src/core（草稿/金额/快照/状态机）· src/adapters（真实 MCP + 隔离测试）· src/server · src/ui · src/accessibility · src/sign-language · tests/ · assets/{design,fixture,live}/ ——全部待建（P1 起）。
+- `assets/manmandian-hero-16x9.png`：✅ AI 生成原创概念主视觉（1672×941；非 live 截图）
+- src/core（草稿/金额/快照/状态机）· src/adapters（真实 MCP + 隔离测试）· src/server · src/ui · src/accessibility · src/sign-language · tests/ · assets/{design,fixture,live}/ 其余内容：待建（P1 起）
 
 ## 主提示词存档
 

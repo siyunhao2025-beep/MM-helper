@@ -6,12 +6,12 @@
 
 | 路径 | 状态 | 验收要点 |
 |---|---|---|
-| README.md | ✅ 已建 | 首屏区分已实现/实验/未测；不写假截图假统计 |
+| README.md | ✅ 已重构（2026-10-09） | 含项目定位、两首原创诗、真实状态、个人/企业边界、安装、示例、合规、上传和报名核对；不写假统计 |
 | CONTEST_DECLARATION.md | ✅ 已建（官方原文） | 内容与官方 blob 136e76f… 一致，不可改动 |
 | MCP_INTEGRATION.md | ✅ 已建 | 实际工具/调用链/证据索引；只读与写入边界 |
 | mcp-config.example.json | ✅ 已建 | 仅 ${MCD_MCP_TOKEN} 占位，无真实凭证 |
 | workbuddy.md | ⚠️ 摘要版 | 需作者导出完整 WorkBuddy 上下文替换 |
-| 源代码 src/ | 待建（P1） | 可运行内容，形式不限 |
+| 可运行内容 / 源代码 | ⚠️ 运行 Skill 已建，独立 src/ 待建（P1） | 官方 README 要求源代码或可运行内容；提交前补最小演示与测试可降低审核风险 |
 | LICENSE | 待作者确认 | 与依赖兼容后添加 |
 
 ## 项目规则与防偏离
@@ -28,7 +28,7 @@
 | 路径 | 状态 |
 |---|---|
 | .codebuddy/skills/manmandian-builder/（SKILL.md + references/×3） | ✅ 已建 |
-| .codebuddy/skills/manmandian/SKILL.md（运行 Skill） | ✅ 已建 |
+| .codebuddy/skills/manmandian/SKILL.md（运行 Skill） | ✅ 已重构并通过结构校验；WorkBuddy 干净环境触发待复测 |
 | src/core/ 草稿·金额·快照·状态机 | 待建（P1） |
 | src/adapters/ 真实 MCP 适配器 + 测试适配器（隔离） | 待建 |
 | src/server/、src/ui/、src/accessibility/、src/sign-language/ | 待建（按阶段） |
@@ -36,7 +36,7 @@
 
 ## docs 与素材（目标全集）
 
-SOURCE_REGISTER（并入 builder references/sources.md）· MCP_CAPABILITY_MATRIX ✅ · FEATURE_STATUS 待建 · EVIDENCE_LEDGER.jsonl ✅ · FILE_MAP ✅ · ACCESSIBILITY 待建 · ACCESSIBILITY_TEST_REPORT 待建（未测写未测）· SIGN_LANGUAGE_MODEL_CARD 待建 · DATA_AND_CONSENT 待建 · TEST_REPORT 待建 · USER_VALUE_EVALUATION 待建 · DEMO_SCRIPT 待建 · SUBMISSION_CHECKLIST 待建 · KNOWN_LIMITATIONS ✅ · THIRD_PARTY_NOTICES ✅ · assets/{design,fixture,live}/ 待建（分目录分标签）
+SOURCE_REGISTER（并入 builder references/sources.md）✅ · MCP_CAPABILITY_MATRIX ✅ · FEATURE_STATUS 待建 · EVIDENCE_LEDGER.jsonl ✅ · FILE_MAP ✅ · ACCESSIBILITY 待建 · ACCESSIBILITY_TEST_REPORT 待建（未测写未测）· SIGN_LANGUAGE_MODEL_CARD 待建 · DATA_AND_CONSENT 待建 · TEST_REPORT 待建 · USER_VALUE_EVALUATION 待建 · DEMO_SCRIPT 待建 · SUBMISSION_CHECKLIST 待建 · KNOWN_LIMITATIONS ✅ · THIRD_PARTY_NOTICES ✅ · `assets/manmandian-hero-16x9.png` ✅（AI 生成概念图；非 live 截图）· assets/{design,fixture,live}/ 其余待建
 
 ## 图文要求（第 17 节）
 
