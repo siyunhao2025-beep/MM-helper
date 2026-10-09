@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "generated": "2026-10-09T17:45:00+08:00",
+  "note": "状态词汇：DESIGNED / IMPLEMENTED / TESTED_FIXTURE / VERIFIED_LIVE_READ / VERIFIED_LIVE_WRITE / EXPERIMENTAL / BLOCKED / NOT_TESTED。本文件是需求追踪索引，不是完成证明；缺实现不删需求，缺证据不标成功。",
+  "requirements": [
+    {"id": "R01", "req": "项目身份和主目标不变", "source": "USER_PROVIDED", "impl": "IMPLEMENTED", "test": "NOT_TESTED", "evidence": "PROJECT_CONSTITUTION.md; .codebuddy/rules/manmandian.md", "acceptance": "恢复测试 H01/H10"},
+    {"id": "R02", "req": "真实 MCP 工具/schema 与只读业务链", "source": "USER_PROVIDED", "impl": "VERIFIED_LIVE_READ", "test": "VERIFIED_LIVE_READ", "evidence": "docs/EVIDENCE_LEDGER.jsonl E2-E6", "acceptance": "范围=珠海门店1440032、默认套餐配置；B系列反例待测"},
+    {"id": "R03", "req": "模糊表达匹配真实菜单，未知不补造", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第2/6节", "acceptance": "B01/B02"},
+    {"id": "R04", "req": "套餐组成、选项、数量、费用可理解", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第2节", "acceptance": "详情核价用户任务"},
+    {"id": "R05", "req": "预算硬约束，不默认加购/消费积分", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第6.3节", "acceptance": "B03/B04"},
+    {"id": "R06", "req": "所有入口共享草稿，局部改选和切换不丢数据", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词图1", "acceptance": "A08"},
+    {"id": "R07", "req": "大字、低视力与窄屏可用", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第7.3节", "acceptance": "A05"},
+    {"id": "R08", "req": "键盘与读屏主流程、第三方边界", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第7.2节", "acceptance": "A01-A04/A11"},
+    {"id": "R09", "req": "全文字、双向沟通、拒麦也可用", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第7.4节", "acceptance": "A06/A07/A12"},
+    {"id": "R10", "req": "精细动作替代与无催促流程", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第7.5节", "acceptance": "A09/A10"},
+    {"id": "R11", "req": "S1 手语实验研发、范围、许可及真实评估", "source": "USER_PROVIDED", "impl": "DESIGNED", "test": "BLOCKED", "evidence": "主提示词第8节", "acceptance": "缺合法模型/词表/共创，明确阻塞"},
+    {"id": "R12", "req": "手语未开放或拒识时保留草稿与替代路径", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词图2", "acceptance": "S01-S03/S08/S09"},
+    {"id": "R13", "req": "相机/麦克风生命周期与最少数据", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第8.4节", "acceptance": "S05/S06"},
+    {"id": "R14", "req": "快照确认、受保护写入与重复下单防护", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第10节", "acceptance": "T01-T08"},
+    {"id": "R15", "req": "支付/取餐/取消/退款如实分离", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第10.4节", "acceptance": "T09-T11"},
+    {"id": "R16", "req": "三类交接卡，不假装门店已收消息", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第6.4节", "acceptance": "T12"},
+    {"id": "R17", "req": "企业价值与自主性评估，不编效果", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第18节", "acceptance": "指标定义+真实研究或未测说明"},
+    {"id": "R18", "req": "可复用运行 Skill、源码、安装和测试", "source": "DESIGN_PROPOSAL", "impl": "PARTIAL", "test": "NOT_TESTED", "evidence": ".codebuddy/skills/manmandian/SKILL.md 已建；源码未建", "acceptance": "新环境复现"},
+    {"id": "R19", "req": "图文、分镜、字幕、素材许可与文件地图", "source": "USER_PROVIDED", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "docs/FILE_MAP.md 已建骨架；图未生成", "acceptance": "主提示词第17节图表清单"},
+    {"id": "R20", "req": "官方参赛材料、真实 WorkBuddy 上下文、发布前授权", "source": "DESIGN_PROPOSAL", "impl": "PARTIAL", "test": "NOT_TESTED", "evidence": "CONTEST_DECLARATION.md 原文已核验入库；workbuddy.md 为摘要版待完整导出", "acceptance": "docs/SUBMISSION_CHECKLIST.md（待建）"},
+    {"id": "R21", "req": "反幻觉、证据追踪和防改标准", "source": "USER_PROVIDED", "impl": "IMPLEMENTED", "test": "NOT_TESTED", "evidence": "docs/EVIDENCE_LEDGER.jsonl; PROJECT_CONSTITUTION.md 第4/5节", "acceptance": "H系列对抗测试"},
+    {"id": "R22", "req": "跨任务恢复、文件核对和用户变更记录", "source": "DESIGN_PROPOSAL", "impl": "IMPLEMENTED", "test": "NOT_TESTED", "evidence": "CONTEXT_HANDOFF.md; DECISIONS.md", "acceptance": "H10 移交实测"}
+  ]
+}

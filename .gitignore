@@ -1,0 +1,24 @@
+# 密钥与环境
+.env
+.env.local
+.env.*.local
+*.token
+*.key
+
+# 依赖与构建
+node_modules/
+dist/
+build/
+coverage/
+
+# 日志与私有证据
+logs/
+*.log
+evidence/private/
+
+# 原始媒体（隐私红线：手语/语音原始素材不入库）
+assets/raw-media/
+
+# 系统文件
+.DS_Store
+Thumbs.db
