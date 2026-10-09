@@ -28,7 +28,7 @@
 | 路径 | 状态 |
 |---|---|
 | .codebuddy/skills/manmandian-builder/（SKILL.md + references/×3） | ✅ 已建 |
-| .codebuddy/skills/manmandian/SKILL.md（运行 Skill） | ✅ 已重构并通过结构校验；WorkBuddy 干净环境触发待复测 |
+| .codebuddy/skills/manmandian/SKILL.md（运行 Skill） | ✅ 已重构为肯定式执行规则；目标汉字与常见英文否定形式计数均为 0，UTF-8 结构校验通过；WorkBuddy 干净环境触发待复测 |
 | src/core/ 草稿·金额·快照·状态机 | 待建（P1） |
 | src/adapters/ 真实 MCP 适配器 + 测试适配器（隔离） | 待建 |
 | src/server/、src/ui/、src/accessibility/、src/sign-language/ | 待建（按阶段） |
