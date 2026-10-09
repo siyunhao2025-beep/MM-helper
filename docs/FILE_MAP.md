@@ -6,7 +6,7 @@
 
 | 路径 | 用途 | 状态 |
 |---|---|---|
-| README.md | 项目介绍/诗歌/真实状态/安装/使用/合规/上传 | ✅ 已整体重构（2026-10-09） |
+| README.md | 视觉叙事版项目介绍/诗歌/真实状态/安装/使用/合规/上传 | ✅ 8 个视觉入口 + 10 个可展开详情区（2026-10-09） |
 | CONTEST_DECLARATION.md | 官方参赛声明（原文） | ✅ |
 | MCP_INTEGRATION.md | MCP 集成说明（比赛必交） | ✅ |
 | mcp-config.example.json | 脱敏配置示例 | ✅ |
@@ -17,7 +17,7 @@
 | PROJECT_STATUS.md | 当前状态 | ✅ |
 | DECISIONS.md | 决定记录 | ✅ |
 | CONTEXT_HANDOFF.md | 交接入口 | ✅ |
-| THIRD_PARTY_NOTICES.md | 第三方许可 | ✅（当前无第三方依赖，引入时更新） |
+| THIRD_PARTY_NOTICES.md | 第三方许可与视觉资产来源 | ✅（4 PNG + 4 SVG 已登记） |
 | LICENSE | 代码许可 | 待作者确认 |
 
 ## .codebuddy/
@@ -43,7 +43,9 @@
 
 ## src/、tests/ 与 assets/
 
-- `assets/manmandian-hero-16x9.png`：✅ AI 生成原创概念主视觉（1672×941；非 live 截图）
+- PNG 概念插画：`manmandian-hero-16x9.png`、`manmandian-story-4-panels.png`、`manmandian-accessible-ways.png`、`manmandian-co-design.png`，均为 1672×941；✅
+- SVG 信息图：`manmandian-three-steps.svg`、`manmandian-eight-guardrails.svg`、`manmandian-status-board.svg`、`manmandian-poems.svg`，均为 1600×900 viewBox；✅
+- 全部图片为设计/说明素材，不是 live 截图、真实菜单或效果证据；来源见 `THIRD_PARTY_NOTICES.md`
 - src/core（草稿/金额/快照/状态机）· src/adapters（真实 MCP + 隔离测试）· src/server · src/ui · src/accessibility · src/sign-language · tests/ · assets/{design,fixture,live}/ 其余内容：待建（P1 起）
 
 ## 主提示词存档

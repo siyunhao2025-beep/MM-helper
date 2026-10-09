@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">慢慢点当前能力状态看板</title>
+  <desc id="desc">看板分为已经具备、仍需验证和边界说明三栏。已经具备项目级技能、真实菜单查询流程、官方核价和未下单沟通卡；仍需验证完整运行、独立界面、辅助技术测试和完整上下文；边界说明为交易走官方渠道、优惠由用户选择、个人令牌仅服务本人、官方合作以书面授权为准。</desc>
+  <rect width="1600" height="900" rx="48" fill="#FFFDF9"/>
+  <text x="800" y="100" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="54" font-weight="800" fill="#253238">现在能做什么？一眼看清</text>
+  <text x="800" y="150" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="24" fill="#59666B">完成、待验证、需授权，三种状态各自说明</text>
+
+  <g transform="translate(70 205)" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif">
+    <rect width="460" height="530" rx="36" fill="#EDF8F5" stroke="#9FD5CB" stroke-width="4"/>
+    <circle cx="70" cy="72" r="38" fill="#2A9D8F"/>
+    <path d="M51 72l13 14 27-32" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="128" y="83" font-size="35" font-weight="800" fill="#146D70">已经具备</text>
+    <text x="42" y="143" font-size="21" fill="#526167">记录证据与适用范围</text>
+
+    <g fill="#FFFFFF" stroke="#C8E7E1" stroke-width="2">
+      <rect x="36" y="178" width="388" height="64" rx="18"/>
+      <rect x="36" y="257" width="388" height="64" rx="18"/>
+      <rect x="36" y="336" width="388" height="64" rx="18"/>
+      <rect x="36" y="415" width="388" height="64" rx="18"/>
+    </g>
+    <g font-size="23" font-weight="700" fill="#253238">
+      <text x="62" y="218">✓ WorkBuddy 项目级 Skill</text>
+      <text x="62" y="297">✓ 查门店、菜单与套餐详情</text>
+      <text x="62" y="376">✓ 官方接口重新核价</text>
+      <text x="62" y="455">✓ “未下单”文字沟通卡</text>
+    </g>
+  </g>
+
+  <g transform="translate(570 205)" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif">
+    <rect width="460" height="530" rx="36" fill="#FFF6E8" stroke="#EAC88F" stroke-width="4"/>
+    <circle cx="70" cy="72" r="38" fill="#E7A745"/>
+    <circle cx="70" cy="72" r="23" fill="none" stroke="#FFFFFF" stroke-width="7"/>
+    <path d="M70 57v18l13 8" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+    <text x="128" y="83" font-size="35" font-weight="800" fill="#986611">仍需验证</text>
+    <text x="42" y="143" font-size="21" fill="#526167">目标写清，验证完成后再记成绩</text>
+
+    <g fill="#FFFFFF" stroke="#F0D9B4" stroke-width="2">
+      <rect x="36" y="178" width="388" height="64" rx="18"/>
+      <rect x="36" y="257" width="388" height="64" rx="18"/>
+      <rect x="36" y="336" width="388" height="64" rx="18"/>
+      <rect x="36" y="415" width="388" height="64" rx="18"/>
+    </g>
+    <g font-size="23" font-weight="700" fill="#253238">
+      <text x="62" y="218">○ 干净环境完整跑一遍</text>
+      <text x="62" y="297">○ 独立界面与自动测试</text>
+      <text x="62" y="376">○ 键盘、读屏与大字实测</text>
+      <text x="62" y="455">○ 完整脱敏 workbuddy.md</text>
+    </g>
+  </g>
+
+  <g transform="translate(1070 205)" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif">
+    <rect width="460" height="530" rx="36" fill="#FCEFEB" stroke="#E5B3A8" stroke-width="4"/>
+    <circle cx="70" cy="72" r="38" fill="#C55742"/>
+    <rect x="51" y="66" width="38" height="29" rx="6" fill="none" stroke="#FFFFFF" stroke-width="7"/>
+    <path d="M59 66v-9a11 11 0 0 1 22 0v9" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+    <text x="128" y="83" font-size="35" font-weight="800" fill="#9F3E30">边界说明</text>
+    <text x="42" y="143" font-size="21" fill="#526167">用清楚路径说明当前授权范围</text>
+
+    <g fill="#FFFFFF" stroke="#EDCEC7" stroke-width="2">
+      <rect x="36" y="178" width="388" height="64" rx="18"/>
+      <rect x="36" y="257" width="388" height="64" rx="18"/>
+      <rect x="36" y="336" width="388" height="64" rx="18"/>
+      <rect x="36" y="415" width="388" height="64" rx="18"/>
+    </g>
+    <g font-size="23" font-weight="700" fill="#253238">
+      <text x="62" y="218">→ 下单、付款与取消走官方渠道</text>
+      <text x="62" y="297">→ 优惠领取由用户主动选择</text>
+      <text x="62" y="376">→ 个人 Token 仅服务本人</text>
+      <text x="62" y="455">→ 官方合作以书面授权为准</text>
+    </g>
+  </g>
+
+  <rect x="390" y="782" width="820" height="76" rx="38" fill="#253238"/>
+  <text x="800" y="832" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">真实，让每一份承诺都有证据支撑</text>
+</svg>

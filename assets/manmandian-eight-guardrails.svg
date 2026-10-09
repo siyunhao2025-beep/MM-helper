@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">慢慢点八项设计护栏</title>
+  <desc id="desc">八项原则分别是一轮一问、最多三选、排除项原样保留、守住预算、未知就明说、只改一项、状态各自清楚和随时能退出。</desc>
+  <rect width="1600" height="900" rx="48" fill="#F7FBFA"/>
+  <text x="800" y="92" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="52" font-weight="800" fill="#253238">八个护栏，守住一个人的决定权</text>
+  <text x="800" y="139" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="24" fill="#59666B">让系统专心说明事实，让人轻松自己决定</text>
+
+  <g font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif">
+    <g transform="translate(70 195)">
+      <rect width="345" height="250" rx="30" fill="#FFFFFF" stroke="#D8E8E5" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#DDF3EF"/>
+      <path d="M48 55h44a12 12 0 0 1 12 12v18a12 12 0 0 1-12 12H73l-17 14 4-14H48a12 12 0 0 1-12-12V67a12 12 0 0 1 12-12z" fill="none" stroke="#167C80" stroke-width="7"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">一轮一问</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">一次只推进一个主要问题</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">问题数量保持轻量</text>
+    </g>
+
+    <g transform="translate(445 195)">
+      <rect width="345" height="250" rx="30" fill="#FFFFFF" stroke="#F1DDC6" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#FFF0DB"/>
+      <rect x="38" y="46" width="20" height="48" rx="5" fill="#E76F51"/>
+      <rect x="62" y="46" width="20" height="48" rx="5" fill="#F4A261"/>
+      <rect x="86" y="46" width="20" height="48" rx="5" fill="#2A9D8F"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">最多三选</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">候选少一点，差异说清楚</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">始终保留“全部跳过”</text>
+    </g>
+
+    <g transform="translate(820 195)">
+      <rect width="345" height="250" rx="30" fill="#FFFFFF" stroke="#F0D2CB" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#FBE8E3"/>
+      <circle cx="70" cy="70" r="27" fill="none" stroke="#B84E3C" stroke-width="8"/>
+      <path d="M51 51l38 38" stroke="#B84E3C" stroke-width="8" stroke-linecap="round"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">排除项原样保留</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">否定词和数量都是硬约束</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">原话保留，逐项复核</text>
+    </g>
+
+    <g transform="translate(1195 195)">
+      <rect width="335" height="250" rx="30" fill="#FFFFFF" stroke="#E9DFC0" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#FFF4C9"/>
+      <path d="M41 58h58v39H41z" fill="none" stroke="#9A741B" stroke-width="7"/>
+      <circle cx="70" cy="78" r="10" fill="none" stroke="#9A741B" stroke-width="6"/>
+      <path d="M37 49h66" stroke="#9A741B" stroke-width="7" stroke-linecap="round"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">守住预算</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">超出多少，先说清楚</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">是否调整，由用户决定</text>
+    </g>
+
+    <g transform="translate(70 485)">
+      <rect width="345" height="250" rx="30" fill="#FFFFFF" stroke="#DBE1EE" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#EAF0FB"/>
+      <text x="70" y="84" text-anchor="middle" font-size="52" font-weight="800" fill="#526C98">?</text>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">未知就明说</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">缺少官方字段就标未知</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">给出下一步核验办法</text>
+    </g>
+
+    <g transform="translate(445 485)">
+      <rect width="345" height="250" rx="30" fill="#FFFFFF" stroke="#D8E8E5" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#DDF3EF"/>
+      <path d="M47 80a27 27 0 1 0 5-29" fill="none" stroke="#167C80" stroke-width="8" stroke-linecap="round"/>
+      <path d="M43 47h18v18" fill="none" stroke="#167C80" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">只改一项</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">改饮料，就只改饮料</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">旧报价随即失效</text>
+    </g>
+
+    <g transform="translate(820 485)">
+      <rect width="345" height="250" rx="30" fill="#FFFFFF" stroke="#F1DDC6" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#FFF0DB"/>
+      <rect x="42" y="42" width="56" height="18" rx="6" fill="#F4A261"/>
+      <rect x="42" y="65" width="56" height="18" rx="6" fill="#2A9D8F"/>
+      <rect x="42" y="88" width="56" height="18" rx="6" fill="#E76F51"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">状态各自清楚</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">核价、下单、付款分别说明</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">沟通卡永远标“未下单”</text>
+    </g>
+
+    <g transform="translate(1195 485)">
+      <rect width="335" height="250" rx="30" fill="#FFFFFF" stroke="#F0D2CB" stroke-width="3"/>
+      <circle cx="70" cy="70" r="40" fill="#FBE8E3"/>
+      <path d="M45 44h38v52H45z" fill="none" stroke="#B84E3C" stroke-width="7"/>
+      <path d="M64 70h44M95 56l14 14-14 14" fill="none" stroke="#B84E3C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="30" y="152" font-size="31" font-weight="800" fill="#253238">随时能退出</text>
+      <text x="30" y="195" font-size="21" fill="#5A676C">停下也是完整结果</text>
+      <text x="30" y="226" font-size="21" fill="#5A676C">节奏始终由用户掌握</text>
+    </g>
+  </g>
+
+  <rect x="420" y="786" width="760" height="70" rx="35" fill="#253238"/>
+  <text x="800" y="832" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">一句话：把决定权稳稳交回用户手里</text>
+</svg>

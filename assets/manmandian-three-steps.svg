@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">慢慢点三步自主点餐流程</title>
+  <desc id="desc">用户先说想要、排除项、预算和数量，系统查询真实菜单并给出最多三个候选，最后重新核价，由用户决定继续、修改或停止，当前仍未下单。</desc>
+  <rect width="1600" height="900" rx="48" fill="#FFF9F2"/>
+  <circle cx="88" cy="88" r="34" fill="#F4A261" opacity="0.25"/>
+  <circle cx="1515" cy="790" r="80" fill="#2A9D8F" opacity="0.12"/>
+
+  <text x="800" y="112" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="56" font-weight="800" fill="#253238">一顿饭，三步说清</text>
+  <text x="800" y="166" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="26" fill="#526167">你说需求 · 系统查真菜单 · 最后仍由你决定</text>
+
+  <path d="M520 444H584" stroke="#D5A45C" stroke-width="14" stroke-linecap="round"/>
+  <path d="M572 424L598 444L572 464" fill="none" stroke="#D5A45C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1016 444H1080" stroke="#D5A45C" stroke-width="14" stroke-linecap="round"/>
+  <path d="M1068 424L1094 444L1068 464" fill="none" stroke="#D5A45C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(70 235)">
+    <rect width="450" height="440" rx="36" fill="#FFFFFF" stroke="#E6D8C7" stroke-width="4"/>
+    <circle cx="225" cy="108" r="66" fill="#FDE3C4"/>
+    <path d="M178 83h94a25 25 0 0 1 25 25v30a25 25 0 0 1-25 25h-38l-30 26 7-26h-33a25 25 0 0 1-25-25v-30a25 25 0 0 1 25-25z" fill="none" stroke="#C65D36" stroke-width="10" stroke-linejoin="round"/>
+    <circle cx="195" cy="122" r="6" fill="#C65D36"/>
+    <circle cx="225" cy="122" r="6" fill="#C65D36"/>
+    <circle cx="255" cy="122" r="6" fill="#C65D36"/>
+    <text x="225" y="222" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="800" fill="#253238">1　说需求</text>
+    <text x="225" y="282" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" fill="#526167">想要什么 · 希望避开什么</text>
+    <text x="225" y="324" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" fill="#526167">几个人 · 预算多少</text>
+    <rect x="70" y="362" width="310" height="50" rx="25" fill="#FFF1DE"/>
+    <text x="225" y="395" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#A64B2A">一轮只问一件事</text>
+  </g>
+
+  <g transform="translate(575 235)">
+    <rect width="450" height="440" rx="36" fill="#FFFFFF" stroke="#C9E4E1" stroke-width="4"/>
+    <circle cx="225" cy="108" r="66" fill="#D9F0ED"/>
+    <rect x="164" y="68" width="106" height="78" rx="12" fill="none" stroke="#167C80" stroke-width="9"/>
+    <rect x="179" y="83" width="26" height="48" rx="6" fill="#F4A261"/>
+    <rect x="209" y="83" width="26" height="48" rx="6" fill="#E76F51"/>
+    <rect x="239" y="83" width="16" height="48" rx="6" fill="#2A9D8F"/>
+    <circle cx="276" cy="145" r="30" fill="#FFFFFF" stroke="#167C80" stroke-width="9"/>
+    <path d="M298 167l27 27" stroke="#167C80" stroke-width="11" stroke-linecap="round"/>
+    <text x="225" y="222" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="800" fill="#253238">2　查真菜单</text>
+    <text x="225" y="282" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" fill="#526167">门店 · 在售餐品 · 套餐详情</text>
+    <text x="225" y="324" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" fill="#526167">已知与未知分开写</text>
+    <rect x="70" y="362" width="310" height="50" rx="25" fill="#E8F7F5"/>
+    <text x="225" y="395" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#116B6F">首屏最多三个候选</text>
+  </g>
+
+  <g transform="translate(1080 235)">
+    <rect width="450" height="440" rx="36" fill="#FFFFFF" stroke="#E9C9C0" stroke-width="4"/>
+    <circle cx="225" cy="108" r="66" fill="#F8DDD5"/>
+    <path d="M183 62h83a17 17 0 0 1 17 17v111H166V79a17 17 0 0 1 17-17z" fill="#FFFFFF" stroke="#B84E3C" stroke-width="9"/>
+    <path d="M190 92h70M190 118h70M190 144h40" stroke="#B84E3C" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="273" cy="160" r="33" fill="#2A9D8F"/>
+    <path d="M258 160l11 11 22-26" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="225" y="222" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="800" fill="#253238">3　核价再决定</text>
+    <text x="225" y="282" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" fill="#526167">改一项，旧报价就失效</text>
+    <text x="225" y="324" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" fill="#526167">继续 · 修改 · 停止，都可以</text>
+    <rect x="70" y="362" width="310" height="50" rx="25" fill="#FCEAE5"/>
+    <text x="225" y="395" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="800" fill="#A64233">当前状态：未下单</text>
+  </g>
+
+  <rect x="300" y="735" width="1000" height="92" rx="46" fill="#253238"/>
+  <text x="800" y="794" text-anchor="middle" font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">耐心等候　·　用户作主　·　按需选择　·　未知就明说</text>
+</svg>

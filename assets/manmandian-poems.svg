@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">慢慢点中英双语诗海报</title>
+  <desc id="desc">左侧是中文诗慢慢点，右侧是英文诗 Take Your Time。两首诗表达从容节奏、用户作主、守住预算与尊严。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF7EC"/>
+      <stop offset="0.5" stop-color="#FDF3EA"/>
+      <stop offset="1" stop-color="#ECF7F5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="48" fill="url(#bg)"/>
+  <circle cx="120" cy="110" r="68" fill="#F4A261" opacity="0.20"/>
+  <circle cx="1490" cy="790" r="110" fill="#2A9D8F" opacity="0.14"/>
+  <path d="M800 145v555" stroke="#DECDBA" stroke-width="3" stroke-dasharray="10 14"/>
+
+  <g font-family="Inter, Noto Sans SC, Microsoft YaHei, sans-serif">
+    <text x="415" y="116" text-anchor="middle" font-size="47" font-weight="800" fill="#253238">《慢慢点》</text>
+    <text x="415" y="157" text-anchor="middle" font-size="22" fill="#A15538">一首写给每个想自己作决定的人</text>
+
+    <g font-size="27" fill="#3D4A4F">
+      <text x="125" y="230">愿陪这一程，把每一步都放慢，</text>
+      <text x="125" y="282">由你来作主，把真菜单摊开来看。</text>
+      <text x="125" y="334">声音可以化成字，字大路也宽，</text>
+      <text x="125" y="386">手上节奏跟着你，一项一项稳稳选完。</text>
+      <text x="125" y="438">三十元守住三十元，预算清清楚楚算，</text>
+      <text x="125" y="490">每个排除项原样保留，选择由你来判断。</text>
+      <text x="125" y="542">愿每一次“我自己来”，都有耐心作伴，</text>
+      <text x="125" y="594">愿一顿寻常的热饭，入口有味，心里有暖。</text>
+    </g>
+
+    <text x="1190" y="116" text-anchor="middle" font-size="47" font-weight="800" fill="#253238">Take Your Time</text>
+    <text x="1190" y="157" text-anchor="middle" font-size="22" fill="#167C80">A poem for choice, dignity, and care</text>
+
+    <g font-size="27" fill="#3D4A4F">
+      <text x="870" y="230">Take every step at your own steady pace;</text>
+      <text x="870" y="282">The facts stay clear, your choices keep their place.</text>
+      <text x="870" y="334">Soft-spoken wishes bloom in letters clear;</text>
+      <text x="870" y="386">Larger paths bring every screen more near.</text>
+      <text x="870" y="438">A budget stays a promise, line by line;</text>
+      <text x="870" y="490">Each choice is yours; the final word is thine.</text>
+      <text x="870" y="542">May every simple meal you choose and share</text>
+      <text x="870" y="594">Be served with truth, with dignity, with care.</text>
+    </g>
+
+    <g transform="translate(682 665)">
+      <path d="M34 53c4-18 23-30 49-30s45 12 49 30z" fill="#E76F51"/>
+      <rect x="37" y="54" width="92" height="18" rx="9" fill="#F4A261"/>
+      <path d="M42 77h82c0 22-18 39-41 39S42 99 42 77z" fill="#C55742"/>
+      <path d="M58 43c7-8 14-12 21-12M84 42c7-8 14-11 21-11" stroke="#FFF7EC" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <rect x="350" y="745" width="900" height="82" rx="41" fill="#253238"/>
+    <text x="800" y="798" text-anchor="middle" font-size="26" font-weight="700" fill="#FFFFFF">慢一点，让每一步更踏实；把决定权，稳稳交回每个人手里。</text>
+  </g>
+</svg>

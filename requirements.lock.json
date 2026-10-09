@@ -21,7 +21,7 @@
     {"id": "R16", "req": "三类交接卡，不假装门店已收消息", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第6.4节", "acceptance": "T12"},
     {"id": "R17", "req": "企业价值与自主性评估，不编效果", "source": "DESIGN_PROPOSAL", "impl": "DESIGNED", "test": "NOT_TESTED", "evidence": "主提示词第18节", "acceptance": "指标定义+真实研究或未测说明"},
     {"id": "R18", "req": "可复用运行 Skill、源码、安装和测试", "source": "DESIGN_PROPOSAL", "impl": "PARTIAL", "test": "NOT_TESTED", "evidence": ".codebuddy/skills/manmandian/SKILL.md 已重构并通过结构校验；独立源码与 WorkBuddy 端到端复测未完成", "acceptance": "干净 WorkBuddy 环境复现 + 最小应用测试"},
-    {"id": "R19", "req": "图文、分镜、字幕、素材许可与文件地图", "source": "USER_PROVIDED", "impl": "PARTIAL", "test": "NOT_TESTED", "evidence": "assets/manmandian-hero-16x9.png 已生成并核对尺寸/内容；README 含 alt；其余图组与视频仍未建", "acceptance": "主提示词第17节完整图表清单"},
+    {"id": "R19", "req": "图文、分镜、字幕、素材许可与文件地图", "source": "USER_PROVIDED", "impl": "PARTIAL", "test": "NOT_TESTED", "evidence": "README 已接入 4 张 1672×941 PNG 概念插画与 4 张 1600×900 SVG 信息图；全部含 alt，SVG 已离线渲染检查；视频与其余图组仍未建", "acceptance": "主提示词第17节完整图表清单"},
     {"id": "R20", "req": "官方参赛材料、真实 WorkBuddy 上下文、发布前授权", "source": "DESIGN_PROPOSAL", "impl": "PARTIAL", "test": "NOT_TESTED", "evidence": "CONTEST_DECLARATION.md 原文已核验入库；workbuddy.md 为摘要版待完整导出", "acceptance": "docs/SUBMISSION_CHECKLIST.md（待建）"},
     {"id": "R21", "req": "反幻觉、证据追踪和防改标准", "source": "USER_PROVIDED", "impl": "IMPLEMENTED", "test": "NOT_TESTED", "evidence": "docs/EVIDENCE_LEDGER.jsonl; PROJECT_CONSTITUTION.md 第4/5节", "acceptance": "H系列对抗测试"},
     {"id": "R22", "req": "跨任务恢复、文件核对和用户变更记录", "source": "DESIGN_PROPOSAL", "impl": "IMPLEMENTED", "test": "NOT_TESTED", "evidence": "CONTEXT_HANDOFF.md; DECISIONS.md", "acceptance": "H10 移交实测"}

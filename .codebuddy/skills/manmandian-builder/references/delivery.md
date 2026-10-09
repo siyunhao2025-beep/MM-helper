@@ -6,7 +6,7 @@
 
 | 路径 | 状态 | 验收要点 |
 |---|---|---|
-| README.md | ✅ 已重构（2026-10-09） | 含项目定位、两首原创诗、真实状态、个人/企业边界、安装、示例、合规、上传和报名核对；不写假统计 |
+| README.md | ✅ 视觉叙事版（2026-10-09） | 8 个视觉入口 + 10 个可展开详情区；含项目定位、两首原创诗、真实状态、个人/企业边界、安装、示例、合规、上传和报名核对；不写假统计 |
 | CONTEST_DECLARATION.md | ✅ 已建（官方原文） | 内容与官方 blob 136e76f… 一致，不可改动 |
 | MCP_INTEGRATION.md | ✅ 已建 | 实际工具/调用链/证据索引；只读与写入边界 |
 | mcp-config.example.json | ✅ 已建 | 仅 ${MCD_MCP_TOKEN} 占位，无真实凭证 |
@@ -36,7 +36,7 @@
 
 ## docs 与素材（目标全集）
 
-SOURCE_REGISTER（并入 builder references/sources.md）✅ · MCP_CAPABILITY_MATRIX ✅ · FEATURE_STATUS 待建 · EVIDENCE_LEDGER.jsonl ✅ · FILE_MAP ✅ · ACCESSIBILITY 待建 · ACCESSIBILITY_TEST_REPORT 待建（未测写未测）· SIGN_LANGUAGE_MODEL_CARD 待建 · DATA_AND_CONSENT 待建 · TEST_REPORT 待建 · USER_VALUE_EVALUATION 待建 · DEMO_SCRIPT 待建 · SUBMISSION_CHECKLIST 待建 · KNOWN_LIMITATIONS ✅ · THIRD_PARTY_NOTICES ✅ · `assets/manmandian-hero-16x9.png` ✅（AI 生成概念图；非 live 截图）· assets/{design,fixture,live}/ 其余待建
+SOURCE_REGISTER（并入 builder references/sources.md）✅ · MCP_CAPABILITY_MATRIX ✅ · FEATURE_STATUS 待建 · EVIDENCE_LEDGER.jsonl ✅ · FILE_MAP ✅ · ACCESSIBILITY 待建 · ACCESSIBILITY_TEST_REPORT 待建（未测写未测）· SIGN_LANGUAGE_MODEL_CARD 待建 · DATA_AND_CONSENT 待建 · TEST_REPORT 待建 · USER_VALUE_EVALUATION 待建 · DEMO_SCRIPT 待建 · SUBMISSION_CHECKLIST 待建 · KNOWN_LIMITATIONS ✅ · THIRD_PARTY_NOTICES ✅ · 4 张 PNG 概念插画 + 4 张 SVG 信息图 ✅（均非 live 截图）· assets/{design,fixture,live}/ 其余待建
 
 ## 图文要求（第 17 节）
 
