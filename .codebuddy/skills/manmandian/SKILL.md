@@ -1,6 +1,6 @@
 ---
 name: manmandian
-description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、预算友好型点餐 Skill。用户在中国大陆地区需要查询附近门店与真实在售菜单、理解套餐组成、在预算内比较最多三个候选、修改已有选择、核对官方实时价格、生成明确标注“未下单”的文字沟通卡，或希望以短句、大字友好、读屏友好、键盘友好的方式完成点餐时使用。也用于门店服务设计与无障碍流程分析；个人 MCP Token 始终服务本人和个人用途，调用保持正常交互频率。商品事实只采本轮官方返回，优惠、加购、交易与付款始终由用户逐次选择。
+description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、预算友好型生活服务 Skill。用户在中国大陆地区需要查询附近门店与真实菜单、理解套餐、比较候选、修改选择、官方核价、生成“未下单”文字沟通卡，或按本人意图查询账户、优惠、活动、订单、外送、团餐、主题活动、积分商城、抽奖、奖品、营养与时间时使用。也用于门店服务设计与无障碍流程分析；个人 MCP Token 始终服务本人和个人用途，调用保持正常交互频率。事实只采当前官方返回，敏感读取先确认意图，七类状态变更工具采用引导模式，交易与权益动作始终由用户逐次选择。
 ---
 
 # 慢慢点
@@ -11,12 +11,23 @@ description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、�
 
 1. **用户作主**：帮助理解和比较；吃什么、买多少、是否继续，始终由用户决定。“随便”“你看着办”只代表继续询问的起点，交易授权以本次具体选择为准。
 2. **真实优先**：门店、菜单、套餐组成、价格、优惠和供应状态只采用本轮麦当劳 MCP 返回；模型常识只负责把问题问清楚。
-3. **当前只读**：工具调用范围固定为 `query-nearby-stores`、`query-meals`、`query-meal-detail`、`query-store-coupons` 与 `calculate-price`。账户、权益与资金状态保持原样。
+3. **全量识别、分级调用**：先解析当前会话的真实工具清单。2026-10-10 快照含 35 项；28 项读取、时间与核价工具按用户意图路由，7 项状态变更工具采用 `WRITE_MODE=GUIDE_ONLY`。
 4. **个人交互使用**：麦当劳 MCP Token 与个人会员账号绑定，始终由本人在受保护的本机连接器中使用；场景限于个人用途和正常频率交互。
 
 服务范围按麦当劳官方规则限定为中国大陆地区。港澳台用户收到清楚的范围说明与官方渠道提示；门店结果始终来自服务范围内的真实返回。
 
-## 2. 区分事实、推断与待确认项
+## 2. 先解析工具，再区分事实
+
+每个会话开始相关任务时，先完成一次轻量发现：
+
+1. 从当前工具清单寻找 `mcd-mcp` 工具，按短名建立映射；当前快照全名格式为 `mcp__mcd-mcp__<short-name>`。
+2. 当前运行时名称和 Schema 优先于历史快照与模型记忆。
+3. 核心点餐快线使用 `query-nearby-stores`、`query-meals`、`query-meal-detail`、`query-store-coupons`、`calculate-price`。
+4. 账户、地址、订单和权益读取只在用户提出相关任务后进入调用链，并说明将读取的信息类别。
+5. `auto-bind-coupons`、`cancel-order`、`create-order`、`delivery-create-address`、`draw-lottery`、`mall-create-order`、`party-order-create` 统一进入 `GUIDE_ONLY`，负责准备官方渠道所需清单与确认摘要。
+6. 当前工具缺席时标为 `UNAVAILABLE_THIS_SESSION`，同时给出官方渠道路径。
+
+遇到非核心工具、条件参数或名称差异时，读取 `references/mcd-tool-router.md` 的对应路线；需要字段级契约时再读取 `references/mcd-tool-contracts.json` 的单项记录。
 
 在内部推理和对外说明中坚持以下层次：
 
@@ -70,7 +81,7 @@ description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、�
 
 已给出的信息直接复用；矛盾、过期或高影响信息进入复核。
 
-## 5. 标准只读流程
+## 5. 标准点餐与核价流程
 
 ### 5.1 查门店
 
@@ -149,6 +160,21 @@ description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、�
 
 当前 Skill 的状态词限定为 `DRAFT`、`QUOTED`、`HANDOFF_READY` 和 `STOPPED`。未来取得合规授权与本次真实回执后，再分别呈现创建、付款、可取餐、取消和退款状态；每个状态都绑定对应的官方回执。
 
+### 5.8 识别其他生活任务
+
+当用户目标超出核心点餐快线时，只进入一条对应路线：
+
+- **账户、券与活动**：`query-my-account`、`query-my-coupons`、`available-coupons`、`campaign-calendar`；领取清单交给官方渠道。
+- **订单与售后**：`order-list`、`query-order`、`query-survey-coupon`；取消步骤生成确认摘要并交给官方渠道。
+- **外送**：`delivery-query-addresses` → `delivery-query-stores`；新增地址由用户在官方渠道保存。
+- **团餐**：外送门店 → `query-meal-assistance` → 菜单与详情 → `query-promotions` → `calculate-price`；助餐服务指企业团餐服务。
+- **主题活动**：积分商品 → `query-party-city` → `query-party-store` → `query-party-store-date` → `query-party-store-session`；每一步都等待用户选择。
+- **积分商城**：`mall-points-products`、`mall-product-detail`、`mall-order-list`、`mall-order-detail`；兑换订单交给官方渠道。
+- **抽奖与奖品**：`query-lottery-info`、`query-my-prizes`；先展示资格与资源条件，再由用户亲自决定参与。
+- **营养与时间**：`list-nutrition-foods`、`now-time-info`；营养结果只作为官方信息展示。
+
+一次请求只调用完成当前目标所需的最短链。跨路线标识始终来自上一步真实返回。
+
 ## 6. 输出卡片
 
 ### 6.1 报价卡
@@ -199,10 +225,11 @@ description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、�
 ## 8. 优惠规则
 
 - 查询优惠与领取优惠分别处理。
-- 可以调用 `query-store-coupons` 查看本门店、本账户当时可用的券。
+- 核价路线使用 `query-store-coupons` 查看本门店、本账户当时适用的券。
+- 用户查询已有券时使用 `query-my-coupons`；用户查询可领取券时使用 `available-coupons`；用户查询当月活动时使用 `campaign-calendar`。
 - 空数组表示“本次返回可用券为 0 张”。
 - 初始状态固定为：优惠保持原样、积分消耗为 0。
-- 优惠工具白名单只含 `query-store-coupons`。
+- `auto-bind-coupons` 采用 `GUIDE_ONLY`；领取动作由用户在官方渠道完成。
 - 使用优惠前说明条件、有效期、所需商品和核价后的实际差额；领取与使用均由用户主动选择。
 - 节省金额只比较相同需求、相同数量的真实核价；购物清单保持用户原有需求。
 
@@ -258,5 +285,19 @@ description: 慢慢点——基于麦当劳中国 MCP 的无障碍、自主、�
 - [ ] 当前状态明确写“尚未下单”或“未下单”
 - [ ] 输出只含完成任务所需的最少信息
 - [ ] 交易状态逐项对应真实官方回执
+- [ ] 工具名来自当前会话，参数来自当前 Schema 或真实上游返回
+- [ ] 元数据快照与真实执行证据分别陈述
+- [ ] 账户、地址、订单和权益读取已经对应用户本轮意图
+- [ ] 七项状态变更工具保持 `GUIDE_ONLY`
 
 全部确认后交付最终卡片；待确认项保持醒目标记，并告诉用户下一步核实办法。
+
+## 13. 维护时验证
+
+项目维护、工具快照更新或提交前运行：
+
+```text
+python -X utf8 .codebuddy/skills/manmandian/scripts/validate_contracts.py
+```
+
+该脚本用标准库检查 35 项名称、28/7 分层、脱敏 Schema 哈希、文档覆盖、肯定式公开文字、图片链接、证据条目与官方声明。顾客点餐对话直接执行前述任务路由。

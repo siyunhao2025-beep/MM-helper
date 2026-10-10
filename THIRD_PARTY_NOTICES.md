@@ -1,6 +1,6 @@
 # THIRD_PARTY_NOTICES
 
-> 当前（2026-10-09）项目尚无第三方代码、运行时模型、数据集或字体依赖；README 使用四张 AI 生成概念插画和四张项目内确定性绘制的 SVG 信息图。以下记录内容与素材来源；引入任何第三方内容时必须更新本文件并核对再分发权。
+> 当前（2026-10-10）项目尚无第三方代码、运行时模型、数据集或字体依赖；README 使用四张 AI 生成概念插画和五张项目内确定性绘制的 SVG 信息图。仓库另含一份由本人 WorkBuddy 会话导出的麦当劳 MCP 脱敏工具契约快照。以下记录内容与素材来源；引入任何第三方内容时必须更新本文件并核对再分发权。
 
 ## 官方材料
 
@@ -14,6 +14,7 @@
 ## 数据
 
 - 所有菜单、价格、门店、优惠、订单数据均来自麦当劳官方 MCP 实时返回（mcp.mcd.cn），本项目不缓存再分发官方数据，引用时标注查询时间
+- `.codebuddy/skills/manmandian/references/mcd-tool-contracts.json`：由 2026-10-10 WorkBuddy 注入的 mcd-mcp 工具定义派生，只保留名称、输入契约、分类与校验哈希；供应方说明中的姓名、手机号、地址与订单号示例未入库；原始导出留在作者本机
 
 ## 项目视觉资产
 
@@ -30,5 +31,6 @@
 - `assets/manmandian-eight-guardrails.svg`
 - `assets/manmandian-status-board.svg`
 - `assets/manmandian-poems.svg`
+- `assets/manmandian-mcp-35-map.svg`
 
 全部视觉资产均不含麦当劳 Logo、官方包装或官方背书声明；README 为每张图提供替代文字，并为关键信息图提供可展开的纯文字版本。若后续替换为官方商品图片、门店照片或真实人物素材，必须另行取得授权并更新本文件。

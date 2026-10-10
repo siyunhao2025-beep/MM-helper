@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">慢慢点麦当劳 MCP 三十五项工具生活任务地图</title>
+  <desc id="desc">三十五项工具分成点餐核价、账户优惠、订单售后、外送地址、团餐活动、积分商城、抽奖奖品、营养时间八条路线；二十八项读取与核价能力按意图使用，七项状态变更能力进入引导模式，决定始终交给用户。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff9e8"/>
+      <stop offset="1" stop-color="#fff0df"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#7d3b27" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .zh{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#3d2c28}
+      .card{fill:#fffdf8;stroke:#f2c777;stroke-width:3}
+      .route{stroke:#e7aa45;stroke-width:5;stroke-linecap:round;stroke-dasharray:7 13;opacity:.75}
+      .h{font-size:31px;font-weight:700}
+      .small{font-size:21px;fill:#72574e}
+      .count{font-size:25px;font-weight:700;fill:#c33b2f}
+      .footer{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;font-size:20px;fill:#fffaf0}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="139" cy="126" r="76" fill="#ffd869" opacity=".34"/>
+  <circle cx="1495" cy="180" r="116" fill="#ef6a5d" opacity=".12"/>
+  <circle cx="1451" cy="760" r="95" fill="#56b8a7" opacity=".13"/>
+
+  <text x="800" y="76" text-anchor="middle" class="zh" font-size="48" font-weight="800">35 个工具，一张为人办事的地图</text>
+  <text x="800" y="116" text-anchor="middle" class="zh" font-size="24" fill="#72574e">先听懂要办的事，再走最短的一条路</text>
+
+  <g class="route">
+    <path d="M690 366 C590 306 500 270 394 250"/>
+    <path d="M678 408 C540 399 429 400 288 401"/>
+    <path d="M691 461 C578 513 492 554 391 602"/>
+    <path d="M742 508 C687 588 654 640 608 714"/>
+    <path d="M910 366 C1010 306 1100 270 1206 250"/>
+    <path d="M922 408 C1060 399 1171 400 1312 401"/>
+    <path d="M909 461 C1022 513 1108 554 1209 602"/>
+    <path d="M858 508 C913 588 946 640 992 714"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="800" cy="418" r="145" fill="#c94437"/>
+    <circle cx="800" cy="418" r="115" fill="#fff7de" stroke="#ffd55c" stroke-width="8"/>
+  </g>
+  <text x="800" y="405" text-anchor="middle" class="zh" font-size="82" font-weight="900" fill="#c94437">35</text>
+  <text x="800" y="449" text-anchor="middle" class="zh" font-size="27" font-weight="700">真实工具定义</text>
+  <text x="800" y="483" text-anchor="middle" class="zh" font-size="19" fill="#72574e">动态发现 · 分级路由</text>
+
+  <g transform="translate(116 164)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#ffd55c"/>
+    <path d="M35 52h36M42 43h22M43 61h20" stroke="#9b3a2e" stroke-width="5" stroke-linecap="round"/>
+    <text x="96" y="55" class="zh h">点餐核价</text>
+    <text x="96" y="89" class="zh count">6 项</text>
+    <text x="28" y="126" class="zh small">找店 · 看餐 · 改选 · 核价</text>
+  </g>
+
+  <g transform="translate(55 328)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#f6a89f"/>
+    <path d="M41 43h24v20H41zM46 48h14M46 55h10" fill="none" stroke="#9b3a2e" stroke-width="4" stroke-linecap="round"/>
+    <text x="96" y="55" class="zh h">账户优惠</text>
+    <text x="96" y="89" class="zh count">5 项</text>
+    <text x="28" y="126" class="zh small">积分 · 已有券 · 可领券 · 活动</text>
+  </g>
+
+  <g transform="translate(116 519)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#9ed7cf"/>
+    <path d="M39 42h27v24H39zM44 49h17M44 56h13" fill="none" stroke="#20695e" stroke-width="4" stroke-linecap="round"/>
+    <text x="96" y="55" class="zh h">订单售后</text>
+    <text x="96" y="89" class="zh count">4 项</text>
+    <text x="28" y="126" class="zh small">列表 · 详情 · 问卷 · 取消引导</text>
+  </g>
+
+  <g transform="translate(458 672)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#b9d8f5"/>
+    <path d="M53 36c-10 0-18 8-18 18 0 13 18 27 18 27s18-14 18-27c0-10-8-18-18-18zm0 12a7 7 0 110 14 7 7 0 010-14z" fill="#376c9c"/>
+    <text x="96" y="55" class="zh h">外送地址</text>
+    <text x="96" y="89" class="zh count">3 项</text>
+    <text x="28" y="126" class="zh small">选地址 · 查配送门店 · 保存引导</text>
+  </g>
+
+  <g transform="translate(1154 164)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#ffd55c"/>
+    <circle cx="45" cy="46" r="8" fill="#9b3a2e"/><circle cx="62" cy="46" r="8" fill="#9b3a2e"/>
+    <path d="M34 68c4-13 34-13 38 0" fill="none" stroke="#9b3a2e" stroke-width="5" stroke-linecap="round"/>
+    <text x="96" y="55" class="zh h">团餐活动</text>
+    <text x="96" y="89" class="zh count">7 项</text>
+    <text x="28" y="126" class="zh small">助餐 · 促销 · 城市 · 门店 · 场次</text>
+  </g>
+
+  <g transform="translate(1215 328)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#f6a89f"/>
+    <path d="M38 47h30l-3 19H42zM44 47l4-10h11l4 10" fill="none" stroke="#9b3a2e" stroke-width="4" stroke-linejoin="round"/>
+    <text x="96" y="55" class="zh h">积分商城</text>
+    <text x="96" y="89" class="zh count">5 项</text>
+    <text x="28" y="126" class="zh small">商品 · 详情 · 订单 · 兑换引导</text>
+  </g>
+
+  <g transform="translate(1154 519)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#9ed7cf"/>
+    <path d="M53 34l6 12 14 2-10 10 2 14-12-6-12 6 2-14-10-10 14-2z" fill="#20695e"/>
+    <text x="96" y="55" class="zh h">抽奖奖品</text>
+    <text x="96" y="89" class="zh count">3 项</text>
+    <text x="28" y="126" class="zh small">资格 · 奖品 · 参与引导</text>
+  </g>
+
+  <g transform="translate(812 672)" filter="url(#shadow)">
+    <rect class="card" width="330" height="154" rx="26"/>
+    <circle cx="53" cy="52" r="28" fill="#b9d8f5"/>
+    <circle cx="53" cy="52" r="17" fill="none" stroke="#376c9c" stroke-width="4"/>
+    <path d="M53 40v13l9 6" fill="none" stroke="#376c9c" stroke-width="4" stroke-linecap="round"/>
+    <text x="96" y="55" class="zh h">营养时间</text>
+    <text x="96" y="89" class="zh count">2 项</text>
+    <text x="28" y="126" class="zh small">官方营养信息 · 当前时间</text>
+  </g>
+
+  <g transform="translate(210 842)">
+    <rect width="1180" height="42" rx="21" fill="#3d2c28" opacity=".94"/>
+    <text x="590" y="29" text-anchor="middle" class="footer">定义 35　·　读取与核价 28　·　历史有限实测 6　·　状态变更 7 项进入 GUIDE_ONLY　·　每一步由用户作主</text>
+  </g>
+</svg>

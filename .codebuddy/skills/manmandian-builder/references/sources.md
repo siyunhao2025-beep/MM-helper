@@ -1,13 +1,13 @@
 # 官方来源清单（sources）
 
-> 最后核对：2026-10-09（北京时间）。官方内容可能更新；报名、发布或启用新能力前重新打开原始页面核验。文档支持不等于本轮账户或门店可用。
+> 最后核对：2026-10-10（北京时间）。官方内容可能更新；报名、发布或启用新能力前重新打开原始页面核验。文档支持不等于本轮账户或门店可用。
 
 | 编号 | 一手来源 | 核验状态 | 当前结论 |
 |---|---|---|---|
 | S1 | [M-China/mcd-developer-innovation-challenge · README.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/README.md) | ✅ 已读；commit `bf5e651…`，blob `7ae70bc…` | README / CONTEST_DECLARATION（内容不可改）/ MCP_INTEGRATION / 源代码或可运行内容为参赛材料；参加 WorkBuddy 奖励需 workbuddy.md。报名截止 2026-10-25 23:59（北京时间） |
 | S2 | [同仓库 · activityGuidelines.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/activityGuidelines.md) | ✅ 已读；blob `e097cb8…` | mcp-config.example.json 必须脱敏；仓库公开；创建时间窗口 2025-12-25 00:00—2026-10-25 23:59；按公开 Star 排名；未满 18 岁者取得父母或法定监护人同意后可参加 |
 | S3 | [同仓库 · CONTEST_DECLARATION.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/CONTEST_DECLARATION.md) | ✅ 已读；blob `136e76f…` | 根目录官方声明与该 blob 一致，内容不可修改 |
-| S4 | [M-China/mcd-mcp-server · README.md](https://github.com/M-China/mcd-mcp-server/blob/main/README.md) | ✅ 已读；commit `e90ecc5…`，blob `19ba45b…` | 服务面向中国大陆地区，不含港澳台；Streamable HTTP；官方地址 `https://mcp.mcd.cn`；指南标注 600 次/分钟上限；工具清单会更新，不固化总数 |
+| S4 | [M-China/mcd-mcp-server · README.md](https://github.com/M-China/mcd-mcp-server/blob/main/README.md) | ✅ 2026-10-10 已重读；历史记录 commit `e90ecc5…`，blob `19ba45b…` | 服务面向中国大陆地区，不含港澳台；Streamable HTTP；官方地址 `https://mcp.mcd.cn`；指南标注 600 次/分钟上限；公开表当前 33 项，版本日志到 1.0.9（2026-09-10）；工具持续上线 |
 | S5 | [麦当劳 MCP 服务规则](https://cdn.mcd.cn/cms/pages/MCPServerRules.html) | ✅ 已读；页面版本日期 2025-12-03 | Token 与个人会员账号强绑定；授权为个人、不可转让、非独家、可撤销、非商业；禁止代下单/代领券牟利、批量高频与自动化调用；第三方 AI 输出以官方渠道为准 |
 | S6 | [WorkBuddy / CodeBuddy 项目级 Skills](https://www.workbuddy.cn/docs/cli/skills) | ✅ 已读 | 项目级 Skill 位于 `.codebuddy/skills/<name>/SKILL.md`；核心 frontmatter 为 `name` 与 `description`，可选权限字段；描述负责触发 |
 | S7 | [WorkBuddy 连接器](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Connector) | ✅ 已读 | 连接器支持手动配置 MCP；真实 Token 仅放本机配置，不进入仓库示例 |
@@ -22,6 +22,7 @@
 - 比赛 README 列“源代码”为必须，activityGuidelines 的最低文件列表未单列源代码：为降低审核风险，既保留可运行 Skill，也应补最小演示与测试，不能把治理文档当完整应用。
 - 比赛 README 的 Issue 列表链接使用了 `M-China-Official`，实际活动仓库位于 `M-China`：报名以实际官方仓库与当时模板为准。
 - 麦当劳 MCP 官方指南给出技术频率上限，但服务规则同时禁止批量、高频和自动化调用：项目按更严格的个人正常交互边界执行，不能把“低于 600 次/分钟”理解为允许自动化。
+- 2026-10-10 WorkBuddy 运行时快照有 35 项：比官方公开表多 `query-promotions` 与 `query-survey-coupon`；派对日期/场次名称也有连字符差异。真实调用以当前运行时定义为准，公开说明同时保留官方表与运行时快照两个来源层级。
 
 ## 报名前需要作者本人确认
 

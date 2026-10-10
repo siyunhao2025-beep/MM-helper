@@ -20,7 +20,7 @@ description: 「慢慢点」项目开发技能——基于麦当劳中国 MCP �
 - 没有真实证据不说完成；不猜接口参数（schema 必须来自真实 tools/list 或真实返回）
 - 不删失败测试、不放宽预算/安全/无障碍要求、不补写假日志
 - 金额用整数分计算，展示时除以 100；确认绑定全要素，变更即失效
-- create-order / cancel-order 等写操作：仅在用户对具体订单明确授权后、且通过代码门禁后调用
+- 七项状态变更工具当前统一采用 `WRITE_MODE=GUIDE_ONLY`；未来开放调用还需用户对具体动作明确授权并通过代码门禁
 - 麦当劳 MCP 仅面向中国大陆地区（不含港澳台）；个人 Token 不得用于企业代客、商业运营、批量、高频或无人值守调用
 - 企业价值只可作为设计与待验证指标陈述；企业试点或部署必须另获麦当劳书面授权
 - 同一问题连续 3 轮修复失败 → 记录最小复现与根因假设，停止盲改
@@ -41,6 +41,8 @@ description: 「慢慢点」项目开发技能——基于麦当劳中国 MCP �
 - `references/truth-and-scope.md` — 真相与边界（事实分层、范围锁定、红线）
 - `references/sources.md` — 官方来源清单与核验状态
 - `references/delivery.md` — 逐文件交付合同与图文要求
+- `../manmandian/references/mcd-tool-router.md` — 35 项运行时工具的人类可读路由
+- `../manmandian/references/mcd-tool-contracts.json` — 35 项脱敏输入契约与快照校验信息
 
 ## 每轮汇报格式
 

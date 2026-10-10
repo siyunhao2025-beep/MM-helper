@@ -6,10 +6,10 @@
 
 <p align="center"><strong>陪你慢慢选，由你做决定。看得懂、改得动、算得清，每一步都由你作主。</strong></p>
 
-<p align="center">无障碍优先　·　真实菜单　·　预算护栏　·　只读到核价　·　始终标明“未下单”</p>
+<p align="center">无障碍优先　·　真实菜单　·　预算护栏　·　35 项分级路由　·　始终标明“未下单”</p>
 
 > [!IMPORTANT]
-> 这是参加“麦当劳程序员创意开发大赛”的独立参赛作品；麦当劳官方产品与承诺请以官方渠道为准。当前交付是 WorkBuddy 项目级 Skill 与只读流程原型，能力止于查门店、看菜单、比较和核价；下单、付款、取消与取餐码均由用户在官方渠道完成。仓库授权范围仍待 LICENSE 明确；Public 目前只代表公开可见。
+> 这是参加“麦当劳程序员创意开发大赛”的独立参赛作品；麦当劳官方产品与承诺请以官方渠道为准。当前交付是 WorkBuddy 项目级 Skill 与分级读取流程：核心购买路径覆盖查门店、看菜单、比较和核价，账户、优惠、订单、外送、团餐、活动、积分、奖品与营养查询随本人意图开启；状态变更步骤统一引导至官方渠道。仓库授权范围仍待 LICENSE 明确；Public 目前只代表公开可见。
 
 ## 20 秒看懂
 
@@ -133,13 +133,33 @@ Skill 可以生成：
 
 </details>
 
+## 35 个工具，先分清再使用
+
+<p align="center">
+  <img src="assets/manmandian-mcp-35-map.svg" alt="三十五项麦当劳 MCP 工具分成八条生活任务路线：点餐核价六项、账户优惠五项、订单售后四项、外送地址三项、团餐活动七项、积分商城五项、抽奖奖品三项、营养时间两项；二十八项读取与核价能力按意图使用，七项状态变更能力进入引导模式，每一步由用户作主" width="100%" />
+</p>
+
+<details>
+<summary><strong>读屏文字版：35 项能力到底验证到了哪一层</strong></summary>
+
+- 2026-10-10 的 WorkBuddy 导出含 35 个唯一工具名、35 份输入 Schema 与 35 个可复算哈希。
+- 这次导出专门采集定义，业务调用与状态变更调用均为 0 次。
+- 2026-10-09 的历史证据记录了 6 个工具的有限范围真实返回：账户、门店、菜单、餐品详情、门店优惠与核价。
+- 取得定义说明我们知道怎样提问；取得真实回执才说明这一次确实办到了。
+- 麦当劳公开指南当前列 33 项；运行时另有团餐促销与订单问卷券，并存在两处派对工具命名差异，所以每轮优先采用当前运行时名称。
+- 28 项读取、时间与核价能力按用户意图使用；7 项状态变更能力进入 `GUIDE_ONLY`，由官方渠道承接最终动作。
+
+完整路由见 [35 工具手册](.codebuddy/skills/manmandian/references/mcd-tool-router.md)，字段级脱敏契约见 [机器可读快照](.codebuddy/skills/manmandian/references/mcd-tool-contracts.json)。
+
+</details>
+
 ## 当前真实状态
 
 <p align="center">
   <img src="assets/manmandian-status-board.svg" alt="状态看板分为已经具备、仍需验证和边界说明。已经具备项目级 Skill、菜单查询流程、官方核价和未下单沟通卡；仍需完整运行、独立界面、辅助技术测试和完整上下文；交易走官方渠道、优惠由用户选择、个人 Token 仅服务本人、官方合作以书面授权为准" width="100%" />
 </p>
 
-最后核对：**2026-10-09（北京时间）**。
+最后核对：**2026-10-10（北京时间）**。
 
 <details>
 <summary><strong>展开查看完整能力表与证据边界</strong></summary>
@@ -148,6 +168,7 @@ Skill 可以生成：
 |---|---|---|
 | WorkBuddy 项目级运行 Skill | 已提供，结构校验通过 | 位于 .codebuddy/skills/manmandian/SKILL.md；仍需在干净 WorkBuddy 环境复测完整任务 |
 | MCP 连接配置 | 已提供示例 | mcp-config.example.json 只放环境变量占位符，真实 Token 仅保存在本机配置 |
+| 35 项 MCP 工具定义 | 已采集并交叉校验 | 名称、输入 Schema 与哈希全部对齐；本次采集用于元数据盘点，调用次数为 0 |
 | 门店 → 菜单 → 详情 → 优惠查询 → 核价 | 有限范围历史实测 | 证据台账记录了 2026-10-09 的只读调用；本轮 README 修订沿用历史证据，用户账号调用次数为零 |
 | 最多三个候选、预算护栏 | Skill 已定义 | 尚无自动化回归测试 |
 | “未下单”报价卡与沟通卡 | Skill 已定义 | 尚无独立 UI 或门店后台 |
@@ -262,7 +283,7 @@ Skill 可以生成：
 | query-store-coupons | 查看可用优惠 | 默认只查看，领取由用户主动选择 |
 | calculate-price | 计算当前草稿总价 | 金额用整数分，修改后重新核价 |
 
-接口 schema 请以运行时的当前 tools/list 与真实返回为准。
+这五项组成日常点餐快线。其余账户、订单、外送、团餐、活动、积分、抽奖、营养与时间能力按用户意图进入对应路线；七项状态变更能力统一进入引导模式。完整 35 项名称、依赖和参数见 [工具路由手册](.codebuddy/skills/manmandian/references/mcd-tool-router.md)。接口 Schema 以当前运行时工具定义与真实返回为准。
 
 ### 报价快照
 
@@ -342,7 +363,12 @@ MM-helper/
 │   ├── CODEBUDDY.md
 │   ├── rules/manmandian.md
 │   └── skills/
-│       ├── manmandian/SKILL.md
+│       ├── manmandian/
+│       │   ├── SKILL.md
+│       │   ├── scripts/validate_contracts.py
+│       │   └── references/
+│       │       ├── mcd-tool-router.md
+│       │       └── mcd-tool-contracts.json
 │       └── manmandian-builder/
 ├── docs/
 │   ├── EVIDENCE_LEDGER.jsonl
@@ -357,15 +383,16 @@ MM-helper/
     ├── manmandian-three-steps.svg
     ├── manmandian-eight-guardrails.svg
     ├── manmandian-status-board.svg
-    └── manmandian-poems.svg
+    ├── manmandian-poems.svg
+    └── manmandian-mcp-35-map.svg
 ~~~
 
 ### 已完成
 
 - 核验比赛文件、官方声明、MCP 指南与服务规则。
-- 建立运行 Skill、事实分层、证据台账和限制说明。
+- 建立运行 Skill、35 工具分级路由、事实分层、证据台账和限制说明。
 - 记录有限范围的真实只读链路证据。
-- 完成视觉叙事版 README、四张卡通插画和四张 SVG 信息图。
+- 完成视觉叙事版 README、四张卡通插画和五张 SVG 信息图。
 
 ### 下一步
 
@@ -404,21 +431,23 @@ MM-helper/
 git status --short
 git diff --check
 git diff
+python -X utf8 .codebuddy/skills/manmandian/scripts/validate_contracts.py
 ~~~
 
 请逐个添加本次确认过的文件：
 
 ~~~bash
-git add README.md
-git add assets/manmandian-hero-16x9.png
-git add .codebuddy/skills/manmandian/SKILL.md
+git add README.md MCP_INTEGRATION.md PROJECT_STATUS.md CONTEXT_HANDOFF.md DECISIONS.md
+git add .codebuddy/skills/manmandian .codebuddy/skills/manmandian-builder .codebuddy/CODEBUDDY.md
+git add docs requirements.lock.json THIRD_PARTY_NOTICES.md
+git add assets/manmandian-mcp-35-map.svg
 git diff --cached
 ~~~
 
 如果当前就在 main：
 
 ~~~bash
-git commit -m "docs: improve visual README"
+git commit -m "feat: route all 35 mcd tools"
 git pull --rebase origin main
 git push origin main
 ~~~
@@ -426,7 +455,7 @@ git push origin main
 如果当前分支类似 workbuddy/main-xxxx：
 
 ~~~bash
-git commit -m "docs: improve visual README"
+git commit -m "feat: route all 35 mcd tools"
 git push -u origin HEAD
 ~~~
 
@@ -438,7 +467,7 @@ git push -u origin HEAD
 【参赛申请】
 项目名称：慢慢点（ManManDian）
 项目地址：https://github.com/siyunhao2025-beep/MM-helper
-项目简介：一个基于麦当劳中国 MCP 的无障碍自主点餐 Skill。它把用户的自然表达转成可修改草稿，查询当前门店真实菜单与套餐详情，给出最多三个候选并进行官方核价；通过预算护栏、排除项与数量复核、报价失效机制及“未下单”沟通卡，帮助老年人、残障用户和偏好文字交流或从容操作的人自己作决定。当前版本保持只读到核价，下单与付款由用户在官方渠道完成，优惠领取由用户主动选择。
+项目简介：一个基于麦当劳中国 MCP 的无障碍自主生活服务 Skill。它动态识别 35 项工具，把点餐核价、账户优惠、订单售后、外送地址、团餐活动、积分商城、抽奖奖品与营养时间分成八条清楚路线；核心点餐流程将自然表达变成可修改草稿，从真实菜单给出最多三个候选并完成官方核价。预算护栏、局部修改、证据分层与“未下单”沟通卡帮助每个人自己作决定；28 项读取与核价能力按本人意图使用，7 项状态变更能力由官方渠道承接最终动作。
 ~~~
 
 </details>

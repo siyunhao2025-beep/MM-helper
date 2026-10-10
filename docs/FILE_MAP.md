@@ -1,12 +1,12 @@
 # FILE_MAP — 文件地图
 
-> 勾选=已存在于仓库且非空；「待建」不算完成。更新于 2026-10-09（P0）。
+> 勾选=已存在于仓库且非空；「待建」不算完成。更新于 2026-10-10（P0.8）。
 
 ## 根目录
 
 | 路径 | 用途 | 状态 |
 |---|---|---|
-| README.md | 视觉叙事版项目介绍/诗歌/真实状态/安装/使用/合规/上传 | ✅ 8 个视觉入口 + 10 个可展开详情区（2026-10-09） |
+| README.md | 视觉叙事版项目介绍/诗歌/35 工具地图/真实状态/安装/使用/合规/上传 | ✅ 9 个视觉入口（2026-10-10） |
 | CONTEST_DECLARATION.md | 官方参赛声明（原文） | ✅ |
 | MCP_INTEGRATION.md | MCP 集成说明（比赛必交） | ✅ |
 | mcp-config.example.json | 脱敏配置示例 | ✅ |
@@ -29,6 +29,9 @@
 | skills/manmandian-builder/SKILL.md | 开发 Skill | ✅ |
 | skills/manmandian-builder/references/ | truth-and-scope / sources / delivery | ✅×3 |
 | skills/manmandian/SKILL.md | 运行 Skill（顾客点餐） | ✅ |
+| skills/manmandian/scripts/validate_contracts.py | 35 项契约、语言、链接、SVG、证据与官方声明零依赖校验 | ✅ |
+| skills/manmandian/references/mcd-tool-router.md | 35 项工具的人类可读路由、门控与依赖 | ✅ |
+| skills/manmandian/references/mcd-tool-contracts.json | 35 项脱敏输入契约与快照哈希 | ✅ |
 
 ## docs/
 
@@ -44,7 +47,7 @@
 ## src/、tests/ 与 assets/
 
 - PNG 概念插画：`manmandian-hero-16x9.png`、`manmandian-story-4-panels.png`、`manmandian-accessible-ways.png`、`manmandian-co-design.png`，均为 1672×941；✅
-- SVG 信息图：`manmandian-three-steps.svg`、`manmandian-eight-guardrails.svg`、`manmandian-status-board.svg`、`manmandian-poems.svg`，均为 1600×900 viewBox；✅
+- SVG 信息图：`manmandian-three-steps.svg`、`manmandian-eight-guardrails.svg`、`manmandian-status-board.svg`、`manmandian-poems.svg`、`manmandian-mcp-35-map.svg`，均为 1600×900 viewBox；✅
 - 全部图片为设计/说明素材，不是 live 截图、真实菜单或效果证据；来源见 `THIRD_PARTY_NOTICES.md`
 - src/core（草稿/金额/快照/状态机）· src/adapters（真实 MCP + 隔离测试）· src/server · src/ui · src/accessibility · src/sign-language · tests/ · assets/{design,fixture,live}/ 其余内容：待建（P1 起）
 

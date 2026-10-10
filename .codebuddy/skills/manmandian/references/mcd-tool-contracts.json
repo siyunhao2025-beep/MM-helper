@@ -1,0 +1,2180 @@
+{
+  "format_version": "1.1",
+  "snapshot": {
+    "captured_at": "2026-10-10T11:14:09+08:00",
+    "server_name": "mcd-mcp",
+    "metadata_source": "WORKBUDDY_INJECTED_METADATA",
+    "tool_count": 35,
+    "business_tool_invocations": 0,
+    "state_change_invocations": 0,
+    "server_url_observed": "UNKNOWN",
+    "workbuddy_version_observed": "UNKNOWN"
+  },
+  "integrity": {
+    "raw_json_sha256": "a97406cb3438268b28aef9e1c64e6e6113fc47c2b6752b9b9991da3ab5219413",
+    "catalog_jsonl_sha256": "92fea9c0e31248c628531784364cad15cab541133e44df8e0ac5d1107ce36d57",
+    "matrix_md_sha256": "4617b70bffd537823c836d7f90e81cdefef93136fe629fd25bfefc8262c0e6c9",
+    "capture_report_md_sha256": "9a3eb7e171c316c0426d7c5103902c692a93f29a09e15c8e90b7a102ca12ce0b",
+    "cross_checks": {
+      "unique_runtime_names": 35,
+      "raw_catalog_name_match": 35,
+      "raw_catalog_description_match": 35,
+      "raw_catalog_schema_match": 35,
+      "recomputed_source_schema_hash_match": 35
+    }
+  },
+  "evidence_note": "本文件是脱敏后的工具定义快照。CAPTURED 表示名称与输入契约已经取得；真实执行状态另见 docs/EVIDENCE_LEDGER.jsonl。",
+  "sanitization_note": "输入 Schema 已递归移除描述、示例与注释字段；供应方说明中的姓名、手机号、地址与订单号示例未入库。source_schema_sha256 对应本机原始 Schema，sanitized_schema_sha256 对应本文件字段。",
+  "tools": [
+    {
+      "short_name": "auto-bind-coupons",
+      "runtime_name": "mcp__mcd-mcp__auto-bind-coupons",
+      "runtime_aliases": [
+        "auto-bind-coupons"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "WRITE_ACCOUNT_STATE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L3_STATE_CHANGE_WITH_SPECIFIC_CONFIRMATION",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "available-coupons",
+      "runtime_name": "mcp__mcd-mcp__available-coupons",
+      "runtime_aliases": [
+        "available-coupons"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "calculate-price",
+      "runtime_name": "mcp__mcd-mcp__calculate-price",
+      "runtime_aliases": [
+        "calculate-price"
+      ],
+      "domain": "STORE_MENU",
+      "operation_class": "CALCULATION",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "storeCode",
+        "orderType",
+        "beType"
+      ],
+      "optional_fields": [
+        "beCode",
+        "gmServiceCode",
+        "items",
+        "needTableware",
+        "reservationDate",
+        "withOrder"
+      ],
+      "enum_fields": {
+        "beType": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "orderType": [
+          1,
+          2
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "reservationDate": [
+          "yyyy-MM-dd HH:mm"
+        ]
+      },
+      "conditional_constraints": [
+        "- reservationDate: 预约场景必传，非预约场景不传",
+        "到店自取(beType=1) → orderType=1，不传 beCode",
+        "得来速(beType=5)   → orderType=1，必传 beCode（从 query-nearby-stores 获取）",
+        "麦乐送(beType=2)   → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "团餐(beType=6)     → orderType=2，必传 beCode（从 delivery-query-stores 获取）"
+      ],
+      "prerequisites": [
+        "已通过 query-nearby-stores 或 delivery-query-stores 取得 storeCode/beCode",
+        "已通过 query-meals 取得 productCode",
+        "如需优惠券需先取得 couponId/couponCode"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "storeCode",
+          "orderType",
+          "beType"
+        ],
+        "properties": {
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "gmServiceCode": {
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "properties": {
+                "couponCode": {
+                  "type": "string"
+                },
+                "couponId": {
+                  "type": "string"
+                },
+                "modification": {
+                  "properties": {
+                    "values": {
+                      "items": {
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "productCode": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "roundList": {
+                  "items": {
+                    "properties": {
+                      "comboItemList": {
+                        "items": {
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "modification": {
+                              "properties": {
+                                "values": {
+                                  "items": {
+                                    "properties": {
+                                      "code": {
+                                        "type": "string"
+                                      },
+                                      "key": {
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "quantity": {
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "round": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "needTableware": {
+            "type": "boolean"
+          },
+          "orderType": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          },
+          "withOrder": {
+            "properties": {
+              "cardId": {
+                "type": "string"
+              },
+              "cardType": {
+                "type": "integer"
+              },
+              "membershipCode": {
+                "type": "string"
+              },
+              "membershipSpecId": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "3e711ac0e5a77082f29e6795e443829778083be80ebfd655797e29df7305706a",
+      "sanitized_schema_sha256": "f1102a65b39cb6c0ee0c229b93105ea4770af9f064a4f6c01899dd8bdff4bcaf",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "campaign-calendar",
+      "runtime_name": "mcp__mcd-mcp__campaign-calendar",
+      "runtime_aliases": [
+        "campaign-calendar"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [],
+      "optional_fields": [
+        "specifiedDate"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "specifiedDate": [
+          "yyyy-MM-dd"
+        ]
+      },
+      "conditional_constraints": [],
+      "prerequisites": [
+        "不确定当前日期时可先调用 now-time-info"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "specifiedDate": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "c7a6f303b093f0fa4009fddc4fdb4450ff7549627fde98243873e864920ceab7",
+      "sanitized_schema_sha256": "b2204500ac02da9581a0289a334006d936fd745de62dab5656b2b22d9ae81be3",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "cancel-order",
+      "runtime_name": "mcp__mcd-mcp__cancel-order",
+      "runtime_aliases": [
+        "cancel-order"
+      ],
+      "domain": "STANDARD_ORDER",
+      "operation_class": "WRITE_ORDER_STATE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "ORDER",
+      "user_confirmation_level": "L4_HIGH_IMPACT_WITH_FINAL_SUMMARY_AND_CONFIRMATION",
+      "required_fields": [
+        "orderId",
+        "cancelReasonCode"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "- cancelReasonCode: 取消原因code，必填，可选值：1=改主意了, 2=重复下单, 3=点错了/点多了/点少了, 4=地址/电话填错了, 5=送达时间选错了, -1=其它原因"
+      ],
+      "prerequisites": [
+        "已有待取消的 orderId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "orderId",
+          "cancelReasonCode"
+        ],
+        "properties": {
+          "cancelReasonCode": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "badf8c6b6e8ec66e7e7df84433b0f31061b92eb39d60dc83eeecb45c68266d62",
+      "sanitized_schema_sha256": "b197d1862c2d6186e959e966490b9483d52451cf5a8233686dba3a518b7ce6b5",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "create-order",
+      "runtime_name": "mcp__mcd-mcp__create-order",
+      "runtime_aliases": [
+        "create-order"
+      ],
+      "domain": "STANDARD_ORDER",
+      "operation_class": "WRITE_ORDER_STATE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "PAYMENT_RELATED",
+      "user_confirmation_level": "L4_HIGH_IMPACT_WITH_FINAL_SUMMARY_AND_CONFIRMATION",
+      "required_fields": [
+        "storeCode",
+        "orderType",
+        "beType"
+      ],
+      "optional_fields": [
+        "addressId",
+        "beCode",
+        "gmServiceCode",
+        "items",
+        "needTableware",
+        "remark",
+        "reservationDate",
+        "takeWayCode",
+        "withOrder"
+      ],
+      "enum_fields": {
+        "beType": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "orderType": [
+          1,
+          2
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "reservationDate": [
+          "yyyy-MM-dd HH:mm"
+        ]
+      },
+      "conditional_constraints": [
+        "Description: 创建麦当劳订单，支持到店(orderType=1)和外送(orderType=2)两种场景下单, 必须先确定订单类型，必填 (1：到店，2外送)",
+        "- addressId: 配送地址ID， orderType=2时必填",
+        "到店自取(beType=1) → orderType=1，不传 beCode",
+        "得来速(beType=5)   → orderType=1，必传 beCode（从 query-nearby-stores 获取）",
+        "麦乐送(beType=2)   → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "团餐(beType=6)     → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "- takeWayCode: orderType=1时必传，取值来自 calculate-price 返回的 data.takeWayList[].code",
+        "- reservationDate: 预约场景必传，非预约场景不传"
+      ],
+      "prerequisites": [
+        "已调用 calculate-price 并取得 takeWayList[].code（orderType=1 时必填）",
+        "orderType=2 时需 delivery-query-addresses 取得 addressId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "storeCode",
+          "orderType",
+          "beType"
+        ],
+        "properties": {
+          "addressId": {
+            "type": "string"
+          },
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "gmServiceCode": {
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "properties": {
+                "couponCode": {
+                  "type": "string"
+                },
+                "couponId": {
+                  "type": "string"
+                },
+                "modification": {
+                  "properties": {
+                    "values": {
+                      "items": {
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "productCode": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "roundList": {
+                  "items": {
+                    "properties": {
+                      "comboItemList": {
+                        "items": {
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "modification": {
+                              "properties": {
+                                "values": {
+                                  "items": {
+                                    "properties": {
+                                      "code": {
+                                        "type": "string"
+                                      },
+                                      "key": {
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "integer"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "quantity": {
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "round": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "needTableware": {
+            "type": "boolean"
+          },
+          "orderType": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          },
+          "takeWayCode": {
+            "type": "string"
+          },
+          "withOrder": {
+            "properties": {
+              "cardId": {
+                "type": "string"
+              },
+              "cardType": {
+                "type": "integer"
+              },
+              "membershipCode": {
+                "type": "string"
+              },
+              "membershipSpecId": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "2c29d71e91d07402b5b06bc11ba7aec9d858cfc24f0d47be032bba854a12227c",
+      "sanitized_schema_sha256": "a2dee2cf897e0e68e446306c89491f0e7ccad8b4bf83728108b8e85d56606fe3",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "delivery-create-address",
+      "runtime_name": "mcp__mcd-mcp__delivery-create-address",
+      "runtime_aliases": [
+        "delivery-create-address"
+      ],
+      "domain": "DELIVERY",
+      "operation_class": "WRITE_ADDRESS_STATE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "ADDRESS",
+      "user_confirmation_level": "L3_STATE_CHANGE_WITH_SPECIFIC_CONFIRMATION",
+      "required_fields": [
+        "address",
+        "addressDetail",
+        "city",
+        "contactName",
+        "phone"
+      ],
+      "optional_fields": [
+        "gender"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "phone": [
+          "11位纯数字（以1开头）"
+        ]
+      },
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已提供城市/联系人/手机号/地址/门牌号"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "address",
+          "addressDetail",
+          "city",
+          "contactName",
+          "phone"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "addressDetail": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "contactName": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "c6ad0ef03cb3b65476cef765cadaac414f779e2063572b57f371dd9ee8ad408f",
+      "sanitized_schema_sha256": "a067005299fc0d201766003b233fe9f561a7723ccd9b30263ef35533bf0632dd",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "delivery-query-addresses",
+      "runtime_name": "mcp__mcd-mcp__delivery-query-addresses",
+      "runtime_aliases": [
+        "delivery-query-addresses"
+      ],
+      "domain": "DELIVERY",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ADDRESS",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "delivery-query-stores",
+      "runtime_name": "mcp__mcd-mcp__delivery-query-stores",
+      "runtime_aliases": [
+        "delivery-query-stores"
+      ],
+      "domain": "DELIVERY",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ADDRESS",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "beType",
+        "addressId"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "- beType: 必填，2: 麦乐送，6：团餐"
+      ],
+      "prerequisites": [
+        "已通过 delivery-query-addresses 取得 addressId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "beType",
+          "addressId"
+        ],
+        "properties": {
+          "addressId": {
+            "type": "string"
+          },
+          "beType": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "18b55ec96a0bf679aff4c4fc71c62c4df4d3ab253e5bed00c8f5853e7fb8469b",
+      "sanitized_schema_sha256": "b4538ed73bfac434397f17084ed6aee8eb58cc687c5a9c62310032304623b704",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "draw-lottery",
+      "runtime_name": "mcp__mcd-mcp__draw-lottery",
+      "runtime_aliases": [
+        "draw-lottery"
+      ],
+      "domain": "LOTTERY_PRIZE",
+      "operation_class": "WRITE_POINTS_OR_CHANCE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L4_HIGH_IMPACT_WITH_FINAL_SUMMARY_AND_CONFIRMATION",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "resourceEligible 为 false 时不得调用"
+      ],
+      "prerequisites": [
+        "已调用 query-lottery-info 并向用户展示 drawDecision.nextConsumption",
+        "drawDecision.resourceEligible 为 true 且用户已明确确认"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "list-nutrition-foods",
+      "runtime_name": "mcp__mcd-mcp__list-nutrition-foods",
+      "runtime_aliases": [
+        "list-nutrition-foods"
+      ],
+      "domain": "NUTRITION",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "HEALTH_RELATED",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "mall-create-order",
+      "runtime_name": "mcp__mcd-mcp__mall-create-order",
+      "runtime_aliases": [
+        "mall-create-order"
+      ],
+      "domain": "MALL_POINTS",
+      "operation_class": "WRITE_ORDER_STATE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L4_HIGH_IMPACT_WITH_FINAL_SUMMARY_AND_CONFIRMATION",
+      "required_fields": [
+        "skuId",
+        "spuCategory"
+      ],
+      "optional_fields": [
+        "addressId",
+        "count"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "- addressId: 配送地址ID，spuCategory=\\\"2\\\"时必填"
+      ],
+      "prerequisites": [
+        "已通过 mall-points-products 或 mall-product-detail 取得 skuId 与 spuCategory",
+        "spuCategory=2 时需先取得 addressId",
+        "用户积分充足"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "skuId",
+          "spuCategory"
+        ],
+        "properties": {
+          "addressId": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "skuId": {
+            "type": "integer"
+          },
+          "spuCategory": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "8460e71aa1c8e1889225f747d7fc9adff52c7b2feee8a707d86bbab990ba3039",
+      "sanitized_schema_sha256": "717e1c00d999953855bf916d77f62fd0f24bcd0b41635c8ef52708a7d315091f",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "mall-order-detail",
+      "runtime_name": "mcp__mcd-mcp__mall-order-detail",
+      "runtime_aliases": [
+        "mall-order-detail"
+      ],
+      "domain": "MALL_POINTS",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ORDER",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [
+        "orderId"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已有商城 orderId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "orderId"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "95bd6da7fb19013ead4e340eb2140b1f9855c9ae6e1fb3503897cd75dbd1c1f1",
+      "sanitized_schema_sha256": "5ecd312368f183e0dd5db8b49b784aa35df4f512c8a235ace5381ad3f4b8bbde",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "mall-order-list",
+      "runtime_name": "mcp__mcd-mcp__mall-order-list",
+      "runtime_aliases": [
+        "mall-order-list"
+      ],
+      "domain": "MALL_POINTS",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ORDER",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [
+        "lastId",
+        "size"
+      ],
+      "enum_fields": {},
+      "default_values": {
+        "size": 10
+      },
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "lastId": {
+            "type": "number"
+          },
+          "size": {
+            "default": 10,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "ebbc315e29ced76f421147c34f2fe2ea69bd91e4f0f5e643ba9063a3cf50976d",
+      "sanitized_schema_sha256": "a487ecbd0d50f8102995b6ce08c8dad8046e260e5b4726509eaaea0af31a086e",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "mall-points-products",
+      "runtime_name": "mcp__mcd-mcp__mall-points-products",
+      "runtime_aliases": [
+        "mall-points-products"
+      ],
+      "domain": "MALL_POINTS",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [],
+      "optional_fields": [
+        "catRuleIds"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "catRuleIds": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "e40e2b656e152568ddae5a73abc31b6ffffbc0fb76026465b3edf19dc96b6390",
+      "sanitized_schema_sha256": "bee156427231c0f673d3dfd69cfdd75b54a4880854fce280aa5ce523e31dbba3",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "mall-product-detail",
+      "runtime_name": "mcp__mcd-mcp__mall-product-detail",
+      "runtime_aliases": [
+        "mall-product-detail"
+      ],
+      "domain": "MALL_POINTS",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "spuId"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已取得 spuId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "spuId"
+        ],
+        "properties": {
+          "spuId": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "177a3a022c486ba461e3242161ebdef4a871f864b2071c0ef7ce97a4cef90a20",
+      "sanitized_schema_sha256": "98c87cafdd9d8f82067b2b116c0f6f9ccc905618803bc29512ff2894fff04df0",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "now-time-info",
+      "runtime_name": "mcp__mcd-mcp__now-time-info",
+      "runtime_aliases": [
+        "now-time-info"
+      ],
+      "domain": "TIME_CONTEXT",
+      "operation_class": "METADATA",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L0_METADATA_ONLY",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "order-list",
+      "runtime_name": "mcp__mcd-mcp__order-list",
+      "runtime_aliases": [
+        "order-list"
+      ],
+      "domain": "STANDARD_ORDER",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ORDER",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "party-order-create",
+      "runtime_name": "mcp__mcd-mcp__party-order-create",
+      "runtime_aliases": [
+        "party-order-create"
+      ],
+      "domain": "PARTY_EVENT",
+      "operation_class": "WRITE_ORDER_STATE",
+      "side_effect_class": "CONFIRMED_STATE_CHANGE_FROM_DESCRIPTION",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L4_HIGH_IMPACT_WITH_FINAL_SUMMARY_AND_CONFIRMATION",
+      "required_fields": [
+        "partyType"
+      ],
+      "optional_fields": [
+        "code",
+        "count",
+        "dateStr",
+        "id",
+        "leftNum",
+        "partyTimeInfo",
+        "skuId",
+        "spuId",
+        "storeCode",
+        "timeEnd",
+        "timeStart"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "支持包场(partyType=1)、拼团(partyType=2)两种场景下单，必须先确认场次类型，必填 (1：包场，2：拼团)",
+        "- timeStart: 场次开始时间, 查询主题活动场次列表(query-party-store-session)（必填）",
+        "- timeEnd: 场次结束时间, 查询主题活动场次列表(query-party-store-session)（必填）"
+      ],
+      "prerequisites": [
+        "已依次取得 spuId/skuId",
+        "已通过 query-party-city 取得 city code",
+        "已通过 query-party-store 取得 storeCode",
+        "已通过 query-party-store-date 取得 dateStr",
+        "已通过 query-party-store-session 取得场次 id/timeStart/timeEnd/leftNum"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "partyType"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "dateStr": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "leftNum": {
+            "type": "integer"
+          },
+          "partyTimeInfo": {
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "leftNum": {
+                "type": "integer"
+              },
+              "partyMax": {
+                "type": "integer"
+              },
+              "partyMin": {
+                "type": "integer"
+              },
+              "price": {
+                "type": "integer"
+              },
+              "timeEnd": {
+                "type": "string"
+              },
+              "timeStart": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "partyType": {
+            "type": "integer"
+          },
+          "skuId": {
+            "type": "number"
+          },
+          "spuId": {
+            "type": "number"
+          },
+          "storeCode": {
+            "type": "string"
+          },
+          "timeEnd": {
+            "type": "string"
+          },
+          "timeStart": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9a1ba04c648c79bd88430a96634c2ccac132579af93235615752ec69640b5c3d",
+      "sanitized_schema_sha256": "ef772fc452f46bf68ee7dca0a5b1aa8a721b1bf9929c65e129eaa28658302743",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-lottery-info",
+      "runtime_name": "mcp__mcd-mcp__query-lottery-info",
+      "runtime_aliases": [
+        "query-lottery-info"
+      ],
+      "domain": "LOTTERY_PRIZE",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-meal-assistance",
+      "runtime_name": "mcp__mcd-mcp__query-meal-assistance",
+      "runtime_aliases": [
+        "query-meal-assistance"
+      ],
+      "domain": "STORE_MENU",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "storeCode"
+      ],
+      "optional_fields": [
+        "beCode",
+        "beType",
+        "orderType",
+        "reservationDate"
+      ],
+      "enum_fields": {
+        "beType": [
+          6
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "到店自取(beType=1) → orderType=1，不传 beCode",
+        "得来速(beType=5)   → orderType=1，必传 beCode（从 query-nearby-stores 获取）",
+        "麦乐送(beType=2)   → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "团餐(beType=6)     → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "- reservationDate: 预约场景必传，非预约场景不传"
+      ],
+      "prerequisites": [
+        "beType=6 企业团餐场景",
+        "已通过 delivery-query-stores 取得 storeCode 与 beCode"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "storeCode"
+        ],
+        "properties": {
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              6
+            ],
+            "type": "integer"
+          },
+          "orderType": {
+            "type": "integer"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "461e13d933344264e031fcfea4e905e7910b779b2a8e3ff981249e410a9805c1",
+      "sanitized_schema_sha256": "0f991ff046636fcb2ddc76550fe7039df1a80bc4338c4ccaa0ad0fee8de9e7fe",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-meal-detail",
+      "runtime_name": "mcp__mcd-mcp__query-meal-detail",
+      "runtime_aliases": [
+        "query-meal-detail"
+      ],
+      "domain": "STORE_MENU",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "storeCode",
+        "orderType",
+        "beType",
+        "code"
+      ],
+      "optional_fields": [
+        "beCode",
+        "reservationDate"
+      ],
+      "enum_fields": {
+        "beType": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "orderType": [
+          1,
+          2
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "reservationDate": [
+          "yyyy-MM-dd HH:mm"
+        ]
+      },
+      "conditional_constraints": [
+        "到店自取(beType=1) → orderType=1，不传 beCode",
+        "得来速(beType=5)   → orderType=1，必传 beCode（从 query-nearby-stores 获取）",
+        "麦乐送(beType=2)   → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "团餐(beType=6)     → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "- reservationDate: 预约时间，仅当用户要预约下单时，该字段必传，格式形如 2020-08-08 09:30"
+      ],
+      "prerequisites": [
+        "已取得 storeCode 与餐品 code"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "storeCode",
+          "orderType",
+          "beType",
+          "code"
+        ],
+        "properties": {
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "code": {
+            "type": "string"
+          },
+          "orderType": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "36fe23667e6f31562d5e739136317571dfe5633d5c1e0d57237f0d6ecf4d46d6",
+      "sanitized_schema_sha256": "5510d40c9ea24f373076b64a601c1882971741f6c697196e16f4872db2ee8570",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-meals",
+      "runtime_name": "mcp__mcd-mcp__query-meals",
+      "runtime_aliases": [
+        "query-meals"
+      ],
+      "domain": "STORE_MENU",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "storeCode",
+        "orderType",
+        "beType"
+      ],
+      "optional_fields": [
+        "beCode",
+        "reservationDate"
+      ],
+      "enum_fields": {
+        "beType": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "orderType": [
+          1,
+          2
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "reservationDate": [
+          "yyyy-MM-dd HH:mm"
+        ]
+      },
+      "conditional_constraints": [
+        "到店自取(beType=1) → orderType=1，不传 beCode",
+        "得来速(beType=5)   → orderType=1，必传 beCode（从 query-nearby-stores 获取）",
+        "麦乐送(beType=2)   → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "团餐(beType=6)     → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "- reservationDate: 预约场景必传，非预约场景不传"
+      ],
+      "prerequisites": [
+        "已取得 storeCode"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "storeCode",
+          "orderType",
+          "beType"
+        ],
+        "properties": {
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "orderType": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "3c247757b7794912a0ed0f56f6305036486b3d818e1ea90d9f8c9effc37ae4f4",
+      "sanitized_schema_sha256": "6293b484d76301fc12faae09689e416cb071493f8fc974e92156568abf9cde4e",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-my-account",
+      "runtime_name": "mcp__mcd-mcp__query-my-account",
+      "runtime_aliases": [
+        "query-my-account"
+      ],
+      "domain": "ACCOUNT",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {},
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "sanitized_schema_sha256": "9284f72895b68d5da186e57484e6016aaea4ebb94234017590759919bde51cc4",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-my-coupons",
+      "runtime_name": "mcp__mcd-mcp__query-my-coupons",
+      "runtime_aliases": [
+        "query-my-coupons"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [
+        "page",
+        "pageSize"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "page": {
+            "type": "string"
+          },
+          "pageSize": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "84feaa41a23b83f39d6583765ecd0149541117cdc9b68ca92188dd109430bc0a",
+      "sanitized_schema_sha256": "2dd5d90e21ecc2f6948572d7bbae44ad911378a4e6824a41a687a4855a2b9078",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-my-prizes",
+      "runtime_name": "mcp__mcd-mcp__query-my-prizes",
+      "runtime_aliases": [
+        "query-my-prizes"
+      ],
+      "domain": "LOTTERY_PRIZE",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [],
+      "optional_fields": [
+        "pageNum",
+        "pageSize"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已登录麦当劳账户"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "pageNum": {
+            "type": "string"
+          },
+          "pageSize": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "5d7b3d2942fe1533cb23123f808ba5321ade2bc59a32d5252a9b1efd848614b8",
+      "sanitized_schema_sha256": "4b765c437cc5838a26c6737742ba11c02b554aba999beaea06101f532e7fcbe5",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-nearby-stores",
+      "runtime_name": "mcp__mcd-mcp__query-nearby-stores",
+      "runtime_aliases": [
+        "query-nearby-stores"
+      ],
+      "domain": "STORE_MENU",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOCATION",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "beType",
+        "searchType"
+      ],
+      "optional_fields": [
+        "city",
+        "keyword"
+      ],
+      "enum_fields": {
+        "beType": [
+          1,
+          5
+        ],
+        "searchType": [
+          1,
+          2
+        ]
+      },
+      "default_values": {
+        "searchType": 1
+      },
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [
+        "- beType=1(到店自提): 返回的门店无 beCode，后续工具调用不传 beCode",
+        "- searchType: 必传，searchType=2 按位置进行搜索， searchType=1 搜索收藏餐厅，默认searchType=1",
+        "- city: 城市，searchType=2 时必填",
+        "- keyword: 位置关键词，searchType=2 时必填",
+        "- beType: 必填，1-到店自取, 5-得来速车道取餐(Drive Through)"
+      ],
+      "prerequisites": [],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "beType",
+          "searchType"
+        ],
+        "properties": {
+          "beType": {
+            "enum": [
+              1,
+              5
+            ],
+            "type": "integer"
+          },
+          "city": {
+            "type": "string"
+          },
+          "keyword": {
+            "type": "string"
+          },
+          "searchType": {
+            "default": 1,
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "a1c6f1aa3937e41108a6b11adf428ea16a1f4cc89d0b23d99bba2e941e2e3d4b",
+      "sanitized_schema_sha256": "daf5d7920515778c6df1ad1147775a22b62653015d1aa16bc71d5c8e639aa878",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-order",
+      "runtime_name": "mcp__mcd-mcp__query-order",
+      "runtime_aliases": [
+        "query-order"
+      ],
+      "domain": "STANDARD_ORDER",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ORDER",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [
+        "orderId"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已有 orderId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "orderId"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "a00eebc5be66d3d0aa7cdc31b94d7df3008a2b126a78e452491bbc698bf5e4f3",
+      "sanitized_schema_sha256": "5ecd312368f183e0dd5db8b49b784aa35df4f512c8a235ace5381ad3f4b8bbde",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-party-city",
+      "runtime_name": "mcp__mcd-mcp__query-party-city",
+      "runtime_aliases": [
+        "query-party-city"
+      ],
+      "domain": "PARTY_EVENT",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "spuId"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已取得 spuId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "spuId"
+        ],
+        "properties": {
+          "spuId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "d5030abfe1ab2faee82b987a282ed13da490feb9f5fd077ddd7b67e3b2a2ed2f",
+      "sanitized_schema_sha256": "f51ce673ab68874d7bd0a0ead07ef67e708fd51f60287ee6c7e6862a820085a7",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-party-store",
+      "runtime_name": "mcp__mcd-mcp__query-party-store",
+      "runtime_aliases": [
+        "query-party-store"
+      ],
+      "domain": "PARTY_EVENT",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOCATION",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "code"
+      ],
+      "optional_fields": [
+        "latitude",
+        "longitude",
+        "spuId"
+      ],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已通过 query-party-city 取得城市 code 与经纬度",
+        "已取得 spuId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "spuId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "ae0223e1e73e24ae3d8c548acf3e685c15f6ef41ca93ddbf386a329f6b38516d",
+      "sanitized_schema_sha256": "12020af105d86489bd7753b56c646ae90f4f19f667c51f790086241041e2e1ca",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-party-store-date",
+      "runtime_name": "mcp__mcd-mcp__query-party-store-date",
+      "runtime_aliases": [
+        "query-party-store-date"
+      ],
+      "domain": "PARTY_EVENT",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "spuId",
+        "storeCode"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已取得 spuId",
+        "已通过 query-party-store 取得 storeCode"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "spuId",
+          "storeCode"
+        ],
+        "properties": {
+          "spuId": {
+            "type": "number"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "4a5c0da46989821794818cad4eff2e3833bf7b5cdd47cc2bfa0f935c27c7b6af",
+      "sanitized_schema_sha256": "fae1ef80088009666836c67d8356a1e29f6feded05da78faba868ba966127292",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-party-store-session",
+      "runtime_name": "mcp__mcd-mcp__query-party-store-session",
+      "runtime_aliases": [
+        "query-party-store-session"
+      ],
+      "domain": "PARTY_EVENT",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "spuId",
+        "storeCode",
+        "dateStr"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "已取得 spuId",
+        "已取得 storeCode",
+        "已通过 query-party-store-date 取得 dateStr"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "spuId",
+          "storeCode",
+          "dateStr"
+        ],
+        "properties": {
+          "dateStr": {
+            "type": "string"
+          },
+          "spuId": {
+            "type": "number"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "bab04f9d0da89ed0c2c5be31b0c139c989621e068d3d70b0373b6ef524d13b1c",
+      "sanitized_schema_sha256": "49e085e5472484600d536bef562519b35a92d5c4b3e6bbeaaa004be666501f1f",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-promotions",
+      "runtime_name": "mcp__mcd-mcp__query-promotions",
+      "runtime_aliases": [
+        "query-promotions"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "READ_PUBLIC_OR_OPERATIONAL",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "LOW",
+      "user_confirmation_level": "L1_NORMAL_READ",
+      "required_fields": [
+        "storeCode",
+        "orderType",
+        "beType"
+      ],
+      "optional_fields": [
+        "beCode",
+        "reservationDate"
+      ],
+      "enum_fields": {
+        "beType": [
+          6
+        ],
+        "orderType": [
+          2
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "reservationDate": [
+          "yyyy-MM-dd HH:mm"
+        ]
+      },
+      "conditional_constraints": [
+        "- beCode: 业务编码，团餐场景必传，与 storeCode 配对使用（从 delivery-query-stores 获取）",
+        "- reservationDate: 预约场景必传，非预约场景不传"
+      ],
+      "prerequisites": [
+        "beType=6 企业团餐场景",
+        "已通过 delivery-query-stores 取得 storeCode 与 beCode"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "storeCode",
+          "orderType",
+          "beType"
+        ],
+        "properties": {
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              6
+            ],
+            "type": "integer"
+          },
+          "orderType": {
+            "enum": [
+              2
+            ],
+            "type": "integer"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "10c73b8e9c17685e986d0999df2246e8cb5cb97af003731fdfff93b17ecaf9c3",
+      "sanitized_schema_sha256": "feb57ef3994efc5b7f7ea36b049c5788f2616e4afb684f9d6a144f9d2688a2b9",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-store-coupons",
+      "runtime_name": "mcp__mcd-mcp__query-store-coupons",
+      "runtime_aliases": [
+        "query-store-coupons"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ACCOUNT",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [
+        "orderType",
+        "beType",
+        "storeCode"
+      ],
+      "optional_fields": [
+        "beCode",
+        "reservationDate"
+      ],
+      "enum_fields": {
+        "beType": [
+          1,
+          2,
+          5,
+          6
+        ],
+        "orderType": [
+          1,
+          2
+        ]
+      },
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {
+        "reservationDate": [
+          "yyyy-MM-dd HH:mm"
+        ]
+      },
+      "conditional_constraints": [
+        "到店自取(beType=1) → orderType=1，不传 beCode",
+        "得来速(beType=5)   → orderType=1，必传 beCode（从 query-nearby-stores 获取）",
+        "麦乐送(beType=2)   → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "团餐(beType=6)     → orderType=2，必传 beCode（从 delivery-query-stores 获取）",
+        "- reservationDate: 预约场景必传，非预约场景不传"
+      ],
+      "prerequisites": [
+        "已取得 storeCode"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "orderType",
+          "beType",
+          "storeCode"
+        ],
+        "properties": {
+          "beCode": {
+            "type": "string"
+          },
+          "beType": {
+            "enum": [
+              1,
+              2,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "orderType": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "reservationDate": {
+            "type": "string"
+          },
+          "storeCode": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "b8221e7e71afff4838c4b1ae91ca2ca808439536a255cb8b5bba43dd5cc6ce33",
+      "sanitized_schema_sha256": "91f14d041f4f94b91a855c75eae1d0c75d62478f93dac435c4fa7f418db7b6b2",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    },
+    {
+      "short_name": "query-survey-coupon",
+      "runtime_name": "mcp__mcd-mcp__query-survey-coupon",
+      "runtime_aliases": [
+        "query-survey-coupon"
+      ],
+      "domain": "COUPON_PROMOTION",
+      "operation_class": "READ_ACCOUNT_SENSITIVE",
+      "side_effect_class": "NONE_OBSERVED",
+      "sensitivity_class": "ORDER",
+      "user_confirmation_level": "L2_SENSITIVE_READ_WITH_USER_INTENT",
+      "required_fields": [
+        "orderId"
+      ],
+      "optional_fields": [],
+      "enum_fields": {},
+      "default_values": {},
+      "array_constraints": {},
+      "numeric_constraints": {},
+      "format_constraints": {},
+      "conditional_constraints": [],
+      "prerequisites": [
+        "用户已提供 orderId"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "orderId"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "source_schema_sha256": "596942d231d25437a18fb586b1b9c4b9561cda0e03cb0a6904d3a8166b470949",
+      "sanitized_schema_sha256": "5ecd312368f183e0dd5db8b49b784aa35df4f512c8a235ace5381ad3f4b8bbde",
+      "metadata_status": "CAPTURED",
+      "live_status_in_this_capture": "NOT_TESTED"
+    }
+  ]
+}
