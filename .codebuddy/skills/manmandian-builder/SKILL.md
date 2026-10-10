@@ -12,7 +12,7 @@ description: 「慢慢点」项目开发技能——基于麦当劳中国 MCP �
 1. 读 `.codebuddy/rules/manmandian.md`（短规则）
 2. 读 `PROJECT_CONSTITUTION.md` → `PROJECT_STATUS.md` → `CONTEXT_HANDOFF.md` → 相关 `DECISIONS.md`
 3. 核对实际代码与 `docs/EVIDENCE_LEDGER.jsonl`，不轻信文档自述
-4. 需求索引：`requirements.lock.json`（R01–R22）
+4. 需求索引：`requirements.lock.json`（R01–R24）
 
 ## 硬约束（违者即为造假）
 

@@ -4,9 +4,9 @@
 
 | 编号 | 一手来源 | 核验状态 | 当前结论 |
 |---|---|---|---|
-| S1 | [M-China/mcd-developer-innovation-challenge · README.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/README.md) | ✅ 已读；commit `bf5e651…`，blob `7ae70bc…` | README / CONTEST_DECLARATION（内容不可改）/ MCP_INTEGRATION / 源代码或可运行内容为参赛材料；参加 WorkBuddy 奖励需 workbuddy.md。报名截止 2026-10-25 23:59（北京时间） |
+| S1 | [M-China/mcd-developer-innovation-challenge · README.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/README.md) | ✅ 已读；2026-10-10 16:00 时点 commit `aa82843…`，blob `7ae70bc…` | README / CONTEST_DECLARATION（内容不可改）/ MCP_INTEGRATION / 源代码或可运行内容为参赛材料；参加 WorkBuddy 奖励需 workbuddy.md。报名截止 2026-10-25 23:59（北京时间） |
 | S2 | [同仓库 · activityGuidelines.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/activityGuidelines.md) | ✅ 已读；blob `e097cb8…` | mcp-config.example.json 必须脱敏；仓库公开；创建时间窗口 2025-12-25 00:00—2026-10-25 23:59；按公开 Star 排名；未满 18 岁者取得父母或法定监护人同意后可参加 |
-| S3 | [同仓库 · CONTEST_DECLARATION.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/CONTEST_DECLARATION.md) | ✅ 已读；blob `136e76f…` | 根目录官方声明与该 blob 一致，内容不可修改 |
+| S3 | [同仓库 · CONTEST_DECLARATION.md](https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/CONTEST_DECLARATION.md) | ✅ 已读；blob `136e76f3160317049f19f5ba03f4d0fedd70fc3c` | 根目录官方声明与该 blob 一致，内容不可修改 |
 | S4 | [M-China/mcd-mcp-server · README.md](https://github.com/M-China/mcd-mcp-server/blob/main/README.md) | ✅ 2026-10-10 已重读；历史记录 commit `e90ecc5…`，blob `19ba45b…` | 服务面向中国大陆地区，不含港澳台；Streamable HTTP；官方地址 `https://mcp.mcd.cn`；指南标注 600 次/分钟上限；公开表当前 33 项，版本日志到 1.0.9（2026-09-10）；工具持续上线 |
 | S5 | [麦当劳 MCP 服务规则](https://cdn.mcd.cn/cms/pages/MCPServerRules.html) | ✅ 已读；页面版本日期 2025-12-03 | Token 与个人会员账号强绑定；授权为个人、不可转让、非独家、可撤销、非商业；禁止代下单/代领券牟利、批量高频与自动化调用；第三方 AI 输出以官方渠道为准 |
 | S6 | [WorkBuddy / CodeBuddy 项目级 Skills](https://www.workbuddy.cn/docs/cli/skills) | ✅ 已读 | 项目级 Skill 位于 `.codebuddy/skills/<name>/SKILL.md`；核心 frontmatter 为 `name` 与 `description`，可选权限字段；描述负责触发 |
@@ -27,6 +27,6 @@
 ## 报名前需要作者本人确认
 
 - 参赛者是中国大陆地区合法居民；如未满 18 周岁，已取得父母或法定监护人同意。
-- `workbuddy.md` 是真实 WorkBuddy 上下文的完整、脱敏导出；当前摘要版可能不足以核验专项奖励。
-- 开源许可证已经选择并与依赖、素材权利相容；Public 仓库本身不自动产生开源授权。
+- 官方把 `workbuddy.md` 定义为真实 WorkBuddy 对话上下文，同时未细化结构化整理版的接受标准；当前文件是公开核验索引，专项奖励前由作者放入原生对话导出并完成脱敏对账。
+- 开源许可证已选择 MIT；作者确认公开署名，并继续核对依赖、素材与第三方权利相容性。Public 仓库本身不自动产生开源授权。
 - 提交 Issue、公开发布和提供兑奖个人信息均由作者本人最终确认。

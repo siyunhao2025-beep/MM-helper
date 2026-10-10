@@ -13,7 +13,7 @@
 
 ## 真实架构（当前）
 
-- 麦当劳官方 MCP（mcp.cn，工具清单以当前运行时定义与官方指南为准）经 WorkBuddy 连接器调用；2026-10-10 元数据快照含 35 项工具，脱敏契约位于 `.codebuddy/skills/manmandian/references/`
+- 麦当劳官方 MCP（`https://mcp.mcd.cn`，工具清单以当前运行时定义与官方指南为准）经 WorkBuddy 连接器调用；2026-10-10 元数据快照含 35 项工具，脱敏契约位于 `.codebuddy/skills/manmandian/references/`
 - 35 项分为八条生活任务路线：28 项读取/时间/核价按用户意图调用，7 项状态变更采用 `WRITE_MODE=GUIDE_ONLY`；历史 E1–E6 只证明 6 项有限范围真实执行
 - 官方服务面向中国大陆地区（不含港澳台），Token 与个人会员账号绑定，仅限个人、非商业、正常频率的交互使用
 - `auto-bind-coupons`、`cancel-order`、`create-order`、`delivery-create-address`、`draw-lottery`、`mall-create-order`、`party-order-create` 只生成解释、依赖与确认摘要，最终动作由用户在官方渠道完成；个人 Token 不用于企业代客、批量或无人值守调用

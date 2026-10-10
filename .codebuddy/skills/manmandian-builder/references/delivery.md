@@ -10,9 +10,9 @@
 | CONTEST_DECLARATION.md | ✅ 已建（官方原文） | 内容与官方 blob 136e76f… 一致，不可改动 |
 | MCP_INTEGRATION.md | ✅ 已建 | 35 项实际工具、八条路线、证据分层、28 项读取/核价与 7 项状态变更门控 |
 | mcp-config.example.json | ✅ 已建 | 仅 ${MCD_MCP_TOKEN} 占位，无真实凭证 |
-| workbuddy.md | ⚠️ 摘要版 | 需作者导出完整 WorkBuddy 上下文替换 |
-| 可运行内容 / 源代码 | ⚠️ 运行 Skill 已建，独立 src/ 待建（P1） | 官方 README 要求源代码或可运行内容；提交前补最小演示与测试可降低审核风险 |
-| LICENSE | 待作者确认 | 与依赖兼容后添加 |
+| workbuddy.md | ⚠️ 结构化公开索引已建 | 专项奖励前由作者放入 WorkBuddy 原生对话导出，并按索引完成脱敏对账 |
+| 可运行内容 / 源代码 | ✅ 运行 Skill 与校验脚本已建；独立 src/ 待建（P1） | 官方 README 接受源代码或可运行内容；最小演示与业务测试用于提升复现体验和产品成熟度 |
+| LICENSE | ✅ 标准 MIT | 作者确认版权行公开署名；第三方权利另见 THIRD_PARTY_NOTICES.md |
 
 ## 项目规则与防偏离
 
@@ -28,9 +28,9 @@
 | 路径 | 状态 |
 |---|---|
 | .codebuddy/skills/manmandian-builder/（SKILL.md + references/×3） | ✅ 已建 |
-| .codebuddy/skills/manmandian/SKILL.md（运行 Skill） | ✅ 已扩展为 35 项动态发现与分级路由；肯定式语言、UTF-8 结构和 118 项静态检查通过；WorkBuddy 干净环境触发待复测 |
+| .codebuddy/skills/manmandian/SKILL.md（运行 Skill） | ✅ 已扩展为 35 项动态发现与分级路由；肯定式语言、UTF-8 结构和 147 项静态检查通过；WorkBuddy 干净环境触发待复测 |
 | .codebuddy/skills/manmandian/references/ | ✅ `mcd-tool-router.md` + `mcd-tool-contracts.json`；35 个唯一工具与输入契约，原始供应方示例留在本机 |
-| .codebuddy/skills/manmandian/scripts/validate_contracts.py | ✅ 标准库自检；覆盖 35 项清单、28/7 分层、脱敏哈希、公开语言、SVG、链接、证据与官方声明 |
+| .codebuddy/skills/manmandian/scripts/validate_contracts.py | ✅ 标准库自检；覆盖 35 项清单、28/7 分层、脱敏哈希、公开语言、SVG、链接、证据、许可证状态、跨文档一致性与官方声明 |
 | src/core/ 草稿·金额·快照·状态机 | 待建（P1） |
 | src/adapters/ 真实 MCP 适配器 + 测试适配器（隔离） | 待建 |
 | src/server/、src/ui/、src/accessibility/、src/sign-language/ | 待建（按阶段） |

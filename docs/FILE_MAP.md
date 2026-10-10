@@ -1,6 +1,6 @@
 # FILE_MAP — 文件地图
 
-> 勾选=已存在于仓库且非空；「待建」不算完成。更新于 2026-10-10（P0.8）。
+> 勾选=已存在于仓库且非空；「待建」不算完成。更新于 2026-10-10（P0.9）。
 
 ## 根目录
 
@@ -10,15 +10,15 @@
 | CONTEST_DECLARATION.md | 官方参赛声明（原文） | ✅ |
 | MCP_INTEGRATION.md | MCP 集成说明（比赛必交） | ✅ |
 | mcp-config.example.json | 脱敏配置示例 | ✅ |
-| workbuddy.md | WorkBuddy 上下文 | ⚠️ 摘要版，待完整导出 |
+| workbuddy.md | WorkBuddy 结构化公开索引 | ⚠️ 索引已建；专项奖励前待作者放入原生对话导出并脱敏对账 |
 | .gitignore | 屏蔽密钥/日志/原始媒体 | ✅ |
 | PROJECT_CONSTITUTION.md | 项目宪法 | ✅ |
-| requirements.lock.json | R01–R22 需求锁定 | ✅ |
+| requirements.lock.json | R01–R24 需求锁定 | ✅ |
 | PROJECT_STATUS.md | 当前状态 | ✅ |
 | DECISIONS.md | 决定记录 | ✅ |
 | CONTEXT_HANDOFF.md | 交接入口 | ✅ |
-| THIRD_PARTY_NOTICES.md | 第三方许可与视觉资产来源 | ✅（4 PNG + 4 SVG 已登记） |
-| LICENSE | 代码许可 | 待作者确认 |
+| THIRD_PARTY_NOTICES.md | 第三方许可与视觉资产来源 | ✅（4 PNG + 5 SVG 已登记） |
+| LICENSE | 作者原创贡献许可 | ✅ 标准 MIT；公开署名待作者确认 |
 
 ## .codebuddy/
 
@@ -29,7 +29,7 @@
 | skills/manmandian-builder/SKILL.md | 开发 Skill | ✅ |
 | skills/manmandian-builder/references/ | truth-and-scope / sources / delivery | ✅×3 |
 | skills/manmandian/SKILL.md | 运行 Skill（顾客点餐） | ✅ |
-| skills/manmandian/scripts/validate_contracts.py | 35 项契约、语言、链接、SVG、证据与官方声明零依赖校验 | ✅ |
+| skills/manmandian/scripts/validate_contracts.py | 35 项契约、语言、链接、SVG、证据、许可证、状态一致性与官方声明零依赖校验 | ✅ |
 | skills/manmandian/references/mcd-tool-router.md | 35 项工具的人类可读路由、门控与依赖 | ✅ |
 | skills/manmandian/references/mcd-tool-contracts.json | 35 项脱敏输入契约与快照哈希 | ✅ |
 

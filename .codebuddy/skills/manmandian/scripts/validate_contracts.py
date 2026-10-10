@@ -15,6 +15,18 @@ CONTRACTS = SKILL_DIR / "references" / "mcd-tool-contracts.json"
 ROUTER = SKILL_DIR / "references" / "mcd-tool-router.md"
 MATRIX = REPO / "docs" / "MCP_CAPABILITY_MATRIX.md"
 README = REPO / "README.md"
+WORKBUDDY = REPO / "workbuddy.md"
+THIRD_PARTY = REPO / "THIRD_PARTY_NOTICES.md"
+LICENSE = REPO / "LICENSE"
+STATUS = REPO / "PROJECT_STATUS.md"
+KNOWN_LIMITATIONS = REPO / "docs" / "KNOWN_LIMITATIONS.md"
+FILE_MAP = REPO / "docs" / "FILE_MAP.md"
+HANDOFF = REPO / "CONTEXT_HANDOFF.md"
+DECISIONS = REPO / "DECISIONS.md"
+BUILDER_SOURCES = REPO / ".codebuddy" / "skills" / "manmandian-builder" / "references" / "sources.md"
+BUILDER_DELIVERY = REPO / ".codebuddy" / "skills" / "manmandian-builder" / "references" / "delivery.md"
+REQUIREMENTS = REPO / "requirements.lock.json"
+EVIDENCE = REPO / "docs" / "EVIDENCE_LEDGER.jsonl"
 
 EXPECTED_NAMES = {
     "auto-bind-coupons",
@@ -69,6 +81,8 @@ PUBLIC_MARKDOWN = [
     SKILL_DIR / "SKILL.md",
     REPO / "MCP_INTEGRATION.md",
     ROUTER,
+    WORKBUDDY,
+    THIRD_PARTY,
 ]
 
 NEGATIVE_EN = re.compile(
@@ -175,6 +189,51 @@ def validate_docs() -> None:
         check("不" not in value, f"affirmative Chinese wording: {path.relative_to(REPO)}")
         check(NEGATIVE_EN.search(value) is None, f"affirmative English wording: {path.relative_to(REPO)}")
 
+    current_state_docs = [STATUS, KNOWN_LIMITATIONS, FILE_MAP, HANDOFF, BUILDER_SOURCES, BUILDER_DELIVERY]
+    stale_state_markers = [
+        "LICENSE 未添加",
+        "LICENSE 未选择",
+        "LICENSE | 待作者确认",
+        "workbuddy.md 为摘要版",
+        "workbuddy.md 仍为摘要版",
+        "⚠️ 摘要版",
+    ]
+    for path in current_state_docs:
+        value = text(path)
+        check(
+            all(marker not in value for marker in stale_state_markers),
+            f"current state is synchronized: {path.relative_to(REPO)}",
+        )
+
+    project_facts = "\n".join(
+        text(path)
+        for path in [README, WORKBUDDY, THIRD_PARTY, STATUS, HANDOFF, FILE_MAP, DECISIONS, EVIDENCE]
+    )
+    check("mcp.cn" not in project_facts, "official MCP hostname is mcp.mcd.cn")
+    check("四张 SVG 信息图" not in text(README), "README says five SVG infographics")
+    check("四张卡通插画由 OpenAI" in text(README), "README says four generated illustrations")
+    check("五张 SVG 信息图" in text(README), "README says five SVG infographics explicitly")
+
+    license_text = text(LICENSE)
+    check(license_text.startswith("MIT License\n"), "standard MIT heading")
+    check("Copyright (c) 2026 siyunhao2025-beep" in license_text, "MIT copyright line")
+    check("依法享有授权权利的原创贡献" in text(THIRD_PARTY), "license scope uses rights-qualified wording")
+
+    workbuddy = text(WORKBUDDY)
+    check("结构化公开索引" in workbuddy, "workbuddy artifact shape is explicit")
+    check("原生对话上下文" in workbuddy, "workbuddy native export action is explicit")
+    check("`README.md` 中三处许可证状态" in workbuddy, "workbuddy records three README updates")
+    check("raw 与 catalog 名称一致 | 35 / 35" in workbuddy, "workbuddy name alignment row")
+    check("raw 与 catalog 描述一致 | 35 / 35" in workbuddy, "workbuddy description alignment row")
+    check("raw 与 catalog `inputSchema` 一致 | 35 / 35" in workbuddy, "workbuddy schema alignment row")
+
+    evidence_text = text(EVIDENCE)
+    check("availablePoint=0" not in evidence_text, "public evidence omits exact account points")
+    check('"source":"mcp.mcd.cn query-my-account"' in evidence_text, "evidence uses official MCP hostname")
+
+    check("aa82843" in text(BUILDER_SOURCES), "current challenge commit recorded")
+    check("136e76f3160317049f19f5ba03f4d0fedd70fc3c" in text(BUILDER_SOURCES), "official declaration blob recorded")
+
     readme = text(README)
     check(readme.count("<details>") == readme.count("</details>"), "README details pairs")
     image_sources = re.findall(r'<img\s+[^>]*src="([^"]+)"', readme)
@@ -211,9 +270,11 @@ def validate_evidence_and_declaration() -> None:
         if line.strip()
     ]
     check(sum(item["id"] == "E18" for item in ledger) == 1, "E18 evidence entry")
+    check(sum(item["id"] == "E20" for item in ledger) == 1, "E20 evidence entry")
 
-    requirements = json.loads(text(REPO / "requirements.lock.json"))["requirements"]
+    requirements = json.loads(text(REQUIREMENTS))["requirements"]
     check(sum(item["id"] == "R23" for item in requirements) == 1, "R23 requirement entry")
+    check(sum(item["id"] == "R24" for item in requirements) == 1, "R24 requirement entry")
 
     declaration = (REPO / "CONTEST_DECLARATION.md").read_bytes().replace(b"\r\n", b"\n")
     git_blob = hashlib.sha1(

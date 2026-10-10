@@ -9,7 +9,7 @@
 <p align="center">无障碍优先　·　真实菜单　·　预算护栏　·　35 项分级路由　·　始终标明“未下单”</p>
 
 > [!IMPORTANT]
-> 这是参加“麦当劳程序员创意开发大赛”的独立参赛作品；麦当劳官方产品与承诺请以官方渠道为准。当前交付是 WorkBuddy 项目级 Skill 与分级读取流程：核心购买路径覆盖查门店、看菜单、比较和核价，账户、优惠、订单、外送、团餐、活动、积分、奖品与营养查询随本人意图开启；状态变更步骤统一引导至官方渠道。仓库采用 MIT 许可证开放复用，第三方素材来源见 THIRD_PARTY_NOTICES.md。
+> 这是参加“麦当劳程序员创意开发大赛”的独立参赛作品；麦当劳官方产品与承诺请以官方渠道为准。当前交付是 WorkBuddy 项目级 Skill 与分级读取流程：核心购买路径覆盖查门店、看菜单、比较和核价，账户、优惠、订单、外送、团餐、活动、积分、奖品与营养查询随本人意图开启；状态变更步骤统一引导至官方渠道。作者依法有权授权的原创贡献采用 MIT 许可证开放复用，第三方素材来源见 THIRD_PARTY_NOTICES.md。
 
 ## 20 秒看懂
 
@@ -359,6 +359,7 @@ MM-helper/
 ├── MCP_INTEGRATION.md
 ├── mcp-config.example.json
 ├── workbuddy.md
+├── LICENSE
 ├── .codebuddy/
 │   ├── CODEBUDDY.md
 │   ├── rules/manmandian.md
@@ -417,11 +418,11 @@ MM-helper/
 - [ ] MCP_INTEGRATION.md 如实说明 Server、Tool、流程和价值。
 - [ ] mcp-config.example.json 只保留占位符，真实 Token 位于本机配置。
 - [ ] 最好补最小演示和测试，降低“只有文档”的风险。
-- [ ] 若申请 WorkBuddy 专项奖励，替换为真实、完整、脱敏的 workbuddy.md。
+- [ ] 若申请 WorkBuddy 专项奖励，将 WorkBuddy 原生导出的真实、完整、脱敏上下文放入 workbuddy.md，并与结构化索引逐项对账。
 - [ ] 作者确认参赛资格；未满 18 岁者取得父母或法定监护人同意。
 - [ ] 在 2026-10-25 23:59（北京时间）前按最新模板报名。
 - [ ] Token、手机号、地址、订单、支付信息与他人个人信息扫描结果为零。
-- [x] 已添加 MIT 开源许可证；Public 代表公开可见。
+- [x] 已添加标准 MIT 开源许可证；作者署名与第三方权利范围在发布前复核。
 
 ### WorkBuddy 修改后上传
 
@@ -438,8 +439,9 @@ python -X utf8 .codebuddy/skills/manmandian/scripts/validate_contracts.py
 
 ~~~bash
 git add README.md MCP_INTEGRATION.md PROJECT_STATUS.md CONTEXT_HANDOFF.md DECISIONS.md
+git add LICENSE workbuddy.md THIRD_PARTY_NOTICES.md
 git add .codebuddy/skills/manmandian .codebuddy/skills/manmandian-builder .codebuddy/CODEBUDDY.md
-git add docs requirements.lock.json THIRD_PARTY_NOTICES.md
+git add docs requirements.lock.json
 git add assets/manmandian-mcp-35-map.svg
 git diff --cached
 ~~~
@@ -447,7 +449,7 @@ git diff --cached
 如果当前就在 main：
 
 ~~~bash
-git commit -m "feat: route all 35 mcd tools"
+git commit -m "docs: update ManManDian skill and evidence"
 git pull --rebase origin main
 git push origin main
 ~~~
@@ -455,7 +457,7 @@ git push origin main
 如果当前分支类似 workbuddy/main-xxxx：
 
 ~~~bash
-git commit -m "feat: route all 35 mcd tools"
+git commit -m "docs: update ManManDian skill and evidence"
 git push -u origin HEAD
 ~~~
 
@@ -486,9 +488,9 @@ git push -u origin HEAD
 
 麦当劳、McDonald’s 及相关商标、商品和数据权利归其权利人所有。本项目仅声明独立参赛作品身份，官方背书与授权请以麦当劳渠道为准。
 
-本页四张卡通插画由 OpenAI 图像生成工具为本项目创作；四张 SVG 信息图由项目内确定性绘制，文字可核对。图片定位为概念说明素材；实时菜单、门店实景与效果证据均以对应官方或测试记录为准。视觉资产采用通用包装与虚构人物，详细记录见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+本页四张卡通插画由 OpenAI 图像生成工具为本项目创作；五张 SVG 信息图由项目内确定性绘制，文字可核对。图片定位为概念说明素材；实时菜单、门店实景与效果证据均以对应官方或测试记录为准。视觉资产采用通用包装与虚构人物，详细记录见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
-代码采用 MIT 许可证；LICENSE 明确复制、修改与再分发的授权范围，素材另行记录于 THIRD_PARTY_NOTICES.md。
+作者依法有权授权的原创贡献采用 [MIT 许可证](LICENSE)；官方材料、商标、数据与视觉来源另行记录于 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ---
 
