@@ -1,0 +1,274 @@
+{
+  "evidence_mode": "TEST_FIXTURE",
+  "evaluated_at": "2026-10-13T12:05:00+08:00",
+  "response_mode": "SCREEN_READER",
+  "card_requested": true,
+  "communication_card_requested": true,
+  "selected_candidate_id": "A",
+  "requested_tool": "create-order",
+  "draft": {
+    "store": {
+      "code": "FIXTURE_STORE_001",
+      "name": "示例门店",
+      "observed_at": "2026-10-13T12:00:00+08:00"
+    },
+    "fulfillment": "到店自取",
+    "fulfillment_context": {"beType": 1, "orderType": 1},
+    "pricing_request_sha256": "fa0d0b29c5d6ca89946f1a400daf21a5cb368af9b1990ad3792c417bace66f37",
+    "people": 2,
+    "budget_fen": 3000,
+    "wants": ["夹鸡肉的"],
+    "exclusions": ["辣味"],
+    "required_constraints": [
+      {
+        "id": "must-chicken-main",
+        "user_text": "包含鸡肉主食"
+      },
+      {
+        "id": "avoid-spicy",
+        "user_text": "辣味"
+      }
+    ],
+    "pending_confirmations": [],
+    "items": [
+      {
+        "code": "FIXTURE_MEAL_A",
+        "name": "示例鸡肉套餐 A",
+        "quantity": 2,
+        "options": [
+          {
+            "code": "FIXTURE_DRINK_WARM",
+            "name": "热饮"
+          }
+        ]
+      }
+    ],
+    "coupon_ids": []
+  },
+  "quote": {
+    "source_tool": "calculate-price",
+    "fact_type": "TEST_OBSERVED",
+    "evidence": "测试夹具中的 calculate-price 响应",
+    "observed_at": "2026-10-13T12:01:00+08:00",
+    "freshness": "CURRENT",
+    "total_fen": 2880,
+    "binding": {
+      "store_code": "FIXTURE_STORE_001",
+      "store_name": "示例门店",
+      "fulfillment": "到店自取",
+      "fulfillment_context": {"beType": 1, "orderType": 1},
+      "pricing_request_sha256": "fa0d0b29c5d6ca89946f1a400daf21a5cb368af9b1990ad3792c417bace66f37",
+      "items": [
+        {
+          "code": "FIXTURE_MEAL_A",
+          "name": "示例鸡肉套餐 A",
+          "quantity": 2,
+          "options": [
+            {
+              "code": "FIXTURE_DRINK_WARM",
+              "name": "热饮"
+            }
+          ]
+        }
+      ],
+      "coupon_ids": []
+    }
+  },
+  "candidates": [
+    {
+      "id": "A",
+      "name": "示例候选 A",
+      "quoted_total_fen": 2880,
+      "price_fact_type": "TEST_OBSERVED",
+      "price_evidence": "测试夹具中的候选核价",
+      "price_source_tool": "calculate-price",
+      "price_observed_at": "2026-10-13T12:01:00+08:00",
+      "price_freshness": "CURRENT",
+      "price_binding": {
+        "store_code": "FIXTURE_STORE_001",
+        "store_name": "示例门店",
+        "fulfillment": "到店自取",
+        "fulfillment_context": {"beType": 1, "orderType": 1},
+        "pricing_request_sha256": "fa0d0b29c5d6ca89946f1a400daf21a5cb368af9b1990ad3792c417bace66f37",
+        "items": [
+          {
+            "code": "FIXTURE_MEAL_A",
+            "name": "示例鸡肉套餐 A",
+            "quantity": 2,
+            "options": [
+              {
+                "code": "FIXTURE_DRINK_WARM",
+                "name": "热饮"
+              }
+            ]
+          }
+        ],
+        "coupon_ids": []
+      },
+      "soft_score": 2,
+      "checks": [
+        {
+          "constraint_id": "must-chicken-main",
+          "constraint": "包含鸡肉主食",
+          "kind": "HARD",
+          "status": "PASS",
+          "fact_type": "TEST_OBSERVED",
+          "evidence": "测试夹具中的餐品详情字段"
+        },
+        {
+          "constraint_id": "avoid-spicy",
+          "constraint": "辣味",
+          "kind": "HARD",
+          "status": "UNKNOWN",
+          "fact_type": "UNKNOWN",
+          "evidence": ""
+        },
+        {
+          "constraint_id": "preference-warm-drink",
+          "constraint": "热饮偏好",
+          "kind": "SOFT",
+          "status": "PASS",
+          "fact_type": "TEST_OBSERVED",
+          "evidence": "测试夹具中的套餐选项"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "示例候选 B",
+      "quoted_total_fen": 3260,
+      "price_fact_type": "TEST_OBSERVED",
+      "price_evidence": "测试夹具中的候选核价",
+      "price_source_tool": "calculate-price",
+      "price_observed_at": "2026-10-13T12:02:00+08:00",
+      "price_freshness": "CURRENT",
+      "price_binding": {
+        "store_code": "FIXTURE_STORE_001",
+        "store_name": "示例门店",
+        "fulfillment": "到店自取",
+        "fulfillment_context": {"beType": 1, "orderType": 1},
+        "pricing_request_sha256": "ca06bc683eaa9cd94d2f3ed2f16db8cd281f154a87ff26ac60b72a242183b868",
+        "items": [
+          {
+            "code": "FIXTURE_MEAL_B",
+            "name": "示例鸡肉套餐 B",
+            "quantity": 2,
+            "options": [
+              {
+                "code": "FIXTURE_DRINK_WARM",
+                "name": "热饮"
+              }
+            ]
+          }
+        ],
+        "coupon_ids": []
+      },
+      "soft_score": 3,
+      "checks": [
+        {
+          "constraint_id": "must-chicken-main",
+          "constraint": "包含鸡肉主食",
+          "kind": "HARD",
+          "status": "PASS",
+          "fact_type": "TEST_OBSERVED",
+          "evidence": "测试夹具中的餐品详情字段"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "示例候选 C",
+      "quoted_total_fen": 2680,
+      "price_fact_type": "TEST_OBSERVED",
+      "price_evidence": "测试夹具中的候选核价",
+      "price_source_tool": "calculate-price",
+      "price_observed_at": "2026-10-13T12:03:00+08:00",
+      "price_freshness": "CURRENT",
+      "price_binding": {
+        "store_code": "FIXTURE_STORE_001",
+        "store_name": "示例门店",
+        "fulfillment": "到店自取",
+        "fulfillment_context": {"beType": 1, "orderType": 1},
+        "pricing_request_sha256": "0755a34f7c51f87a6d3aff96c7d72c20dfee9b46b15c12dfc01cc06401a96835",
+        "items": [
+          {
+            "code": "FIXTURE_MEAL_C",
+            "name": "示例鸡肉套餐 C",
+            "quantity": 2,
+            "options": []
+          }
+        ],
+        "coupon_ids": []
+      },
+      "soft_score": 1,
+      "checks": [
+        {
+          "constraint_id": "must-chicken-main",
+          "constraint": "包含鸡肉主食",
+          "kind": "HARD",
+          "status": "FAIL",
+          "fact_type": "TEST_OBSERVED",
+          "evidence": "测试夹具中的餐品详情字段"
+        }
+      ]
+    }
+  ],
+  "offer_comparison": {
+    "baseline": {
+      "total_fen": 3000,
+      "store_code": "FIXTURE_STORE_001",
+      "store_name": "示例门店",
+      "fulfillment": "到店自取",
+      "fulfillment_context": {"beType": 1, "orderType": 1},
+      "pricing_request_sha256": "6d13465fbe1a8da79a98862eb36a5241ac9cd6af1ca2df16a987613b5f4b17fb",
+      "pricing_basis_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "coupon_ids": [],
+      "source_tool": "calculate-price",
+      "observed_at": "2026-10-13T12:00:30+08:00",
+      "freshness": "CURRENT",
+      "fact_type": "TEST_OBSERVED",
+      "evidence": "测试夹具中的基准核价",
+      "items": [
+        {
+          "code": "FIXTURE_MEAL_A",
+          "name": "示例鸡肉套餐 A",
+          "quantity": 2,
+          "options": [
+            {
+              "code": "FIXTURE_DRINK_WARM",
+              "name": "热饮"
+            }
+          ]
+        }
+      ]
+    },
+    "alternative": {
+      "total_fen": 2880,
+      "store_code": "FIXTURE_STORE_001",
+      "store_name": "示例门店",
+      "fulfillment": "到店自取",
+      "fulfillment_context": {"beType": 1, "orderType": 1},
+      "pricing_request_sha256": "5ac5dc7d8eb8755c47b58fb81d2b6bf589ea32cc8dc8f4fee3f64ea5ec54406f",
+      "pricing_basis_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "coupon_ids": ["FIXTURE_COUPON"],
+      "source_tool": "calculate-price",
+      "observed_at": "2026-10-13T12:01:00+08:00",
+      "freshness": "CURRENT",
+      "fact_type": "TEST_OBSERVED",
+      "evidence": "测试夹具中的方案核价",
+      "items": [
+        {
+          "code": "FIXTURE_MEAL_A",
+          "name": "示例鸡肉套餐 A",
+          "quantity": 2,
+          "options": [
+            {
+              "code": "FIXTURE_DRINK_WARM",
+              "name": "热饮"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

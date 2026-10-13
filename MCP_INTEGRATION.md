@@ -1,6 +1,6 @@
 # MCP_INTEGRATION — 麦当劳 MCP 真实集成说明
 
-> 本文件把“官方文档写了什么”“WorkBuddy 本轮看见什么”“项目曾经真实跑过什么”分开记录。完整字段契约见 `.codebuddy/skills/manmandian/references/mcd-tool-contracts.json`，逐工具状态见 `docs/MCP_CAPABILITY_MATRIX.md`，真实调用证据见 `docs/EVIDENCE_LEDGER.jsonl`。
+> 本文件把“官方文档写了什么”“WorkBuddy 本轮看见什么”“项目曾经真实跑过什么”分开记录。完整字段契约见 `.codebuddy/skills/manmandian/references/mcd-tool-contracts.json`，候选与报价规则见 `.codebuddy/skills/manmandian/references/decision-contract.md`，逐工具状态见 `docs/MCP_CAPABILITY_MATRIX.md`，真实调用证据见 `docs/EVIDENCE_LEDGER.jsonl`。
 
 ## 1. 服务器、账户与使用范围
 
@@ -84,6 +84,17 @@ mcp__mcd-mcp__<short-name>
 
 定义快照说明“知道接口怎样使用”；真实调用证据说明“在记录范围内执行成功”。两个层次分别陈述。
 
+### 4.3 本地 fixture 验证
+
+`src/core/decision_guard.py` 接收结构化草稿、候选和报价，执行 35 工具代码级白名单、整数分、稳定约束标识、三态约束、预算、报价指纹、四类履约画像、调用方核价请求摘要绑定、证据模式、同篮优惠、读屏渲染与状态变更门控。66 项自动测试使用 `TEST_FIXTURE / TEST_OBSERVED` 标签；真实工具数据使用 `TOOL_OBSERVED` 标签，两类结果分别陈述。
+
+~~~bash
+python -X utf8 -m unittest discover -s tests -v
+python -X utf8 -m src.core.cli examples/accessible-order.fixture.json
+~~~
+
+fixture 证明本地决定逻辑在对应测试范围内成立；真实菜单、价格与供应仍由本轮 MCP 回执支撑。
+
 ## 5. 八条任务路线与 35 项工具
 
 | 路线 | 工具 |
@@ -135,11 +146,16 @@ query-nearby-stores
 - 到店自取：`beType=1, orderType=1`，`beCode` 留空
 - 得来速：`beType=5, orderType=1`，`beCode` 来自 `query-nearby-stores`
 - 麦乐送：`beType=2, orderType=2`，`addressId` 与 `beCode` 来自外送路线
-- 企业团餐：`beType=6, orderType=2`，`gmServiceCode` 来自 `query-meal-assistance`
+- 企业团餐：`beType=6, orderType=2`，`addressId`、`beCode` 来自外送路线，`gmServiceCode` 来自 `query-meal-assistance`
 - 预约：`reservationDate` 只随预约场景传递
 - 特调：含 `unselectedKey` 的组按真实详情全量回传选择状态
 - 金额：内部统一使用整数分；对外显示两位小数人民币元
-- 报价绑定门店、通道、餐品、数量、套餐选项、优惠与时间；任一绑定项变化即进入 `STALE`
+- 报价身份指纹绑定门店、通道、履约参数、餐品编码、数量、套餐选项编码、优惠标识与调用方核价请求摘要；任一身份字段变化即进入 `STALE`
+- 未来真实适配层把实际发出的完整 `calculate-price` 规范化请求整体计算为 SHA-256；`needTableware`、`withOrder`、套餐轮次、特调、优惠与当前 Schema 新增的核价字段都进入摘要。现有本地核心把调用方摘要视为信任边界，只校验 64 位格式、绑定与变化关系；公开报告只写请求和地址已绑定，优惠只写数量
+- 优惠比较另带 `pricing_basis_sha256`：真实适配层仅中和明确的券字段后计算比较基准。购物篮、履约上下文与比较基准都一致时，券选择变化才进入已验证节省；其余请求差异标为 `DIFFERENT_PRICING_REQUEST`
+- 总额、观察时间和新鲜度保存在指纹旁边；适配层依据本轮回执显式给出 `CURRENT / EXPIRED / UNKNOWN`，本地核心校验时间格式与先后关系
+- 商品展示名服务阅读，商品编码服务报价绑定；展示名更新维持当前指纹
+- 同一清单的两次真实核价可以展示节省金额；清单变化时展示增加项、减少项和总额差异
 
 ## 8. 条件依赖高于表面字段数
 

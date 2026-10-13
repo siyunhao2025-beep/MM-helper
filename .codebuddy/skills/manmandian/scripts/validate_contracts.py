@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 import sys
 import urllib.parse
 import xml.etree.ElementTree as ET
@@ -13,6 +14,8 @@ REPO = Path(__file__).resolve().parents[4]
 SKILL_DIR = REPO / ".codebuddy" / "skills" / "manmandian"
 CONTRACTS = SKILL_DIR / "references" / "mcd-tool-contracts.json"
 ROUTER = SKILL_DIR / "references" / "mcd-tool-router.md"
+DECISION_CONTRACT = SKILL_DIR / "references" / "decision-contract.md"
+ACCESSIBLE_MODES = SKILL_DIR / "references" / "accessible-response-modes.md"
 MATRIX = REPO / "docs" / "MCP_CAPABILITY_MATRIX.md"
 README = REPO / "README.md"
 WORKBUDDY = REPO / "workbuddy.md"
@@ -27,6 +30,10 @@ BUILDER_SOURCES = REPO / ".codebuddy" / "skills" / "manmandian-builder" / "refer
 BUILDER_DELIVERY = REPO / ".codebuddy" / "skills" / "manmandian-builder" / "references" / "delivery.md"
 REQUIREMENTS = REPO / "requirements.lock.json"
 EVIDENCE = REPO / "docs" / "EVIDENCE_LEDGER.jsonl"
+CORE = REPO / "src" / "core" / "decision_guard.py"
+CORE_CLI = REPO / "src" / "core" / "cli.py"
+FIXTURE = REPO / "examples" / "accessible-order.fixture.json"
+UNIT_TESTS = REPO / "tests" / "test_decision_guard.py"
 
 EXPECTED_NAMES = {
     "auto-bind-coupons",
@@ -81,6 +88,8 @@ PUBLIC_MARKDOWN = [
     SKILL_DIR / "SKILL.md",
     REPO / "MCP_INTEGRATION.md",
     ROUTER,
+    DECISION_CONTRACT,
+    ACCESSIBLE_MODES,
     WORKBUDDY,
     THIRD_PARTY,
 ]
@@ -231,7 +240,8 @@ def validate_docs() -> None:
     check("availablePoint=0" not in evidence_text, "public evidence omits exact account points")
     check('"source":"mcp.mcd.cn query-my-account"' in evidence_text, "evidence uses official MCP hostname")
 
-    check("aa82843" in text(BUILDER_SOURCES), "current challenge commit recorded")
+    check("756b6952cd67d35e77d1f237ca2708ff731ea04c" in text(BUILDER_SOURCES), "current challenge commit recorded")
+    check("e693168f73634717491890fe4583d4aeb501fb25" in text(BUILDER_SOURCES), "current challenge README blob recorded")
     check("136e76f3160317049f19f5ba03f4d0fedd70fc3c" in text(BUILDER_SOURCES), "official declaration blob recorded")
 
     readme = text(README)
@@ -250,6 +260,193 @@ def validate_docs() -> None:
     ]
     resolved = [REPO / urllib.parse.unquote(value.split("#", 1)[0]) for value in local_links]
     check(all(path.exists() for path in resolved), "README local links")
+    check("flowchart LR" in readme, "README decision flow")
+    check("66 项 fixture 自动测试通过" in readme, "README fixture result")
+    check("不" not in text(CORE), "affirmative Chinese wording: src/core/decision_guard.py")
+    check("不" not in text(CORE_CLI), "affirmative Chinese wording: src/core/cli.py")
+
+
+def validate_decision_guard() -> None:
+    required = [DECISION_CONTRACT, ACCESSIBLE_MODES, CORE, CORE_CLI, FIXTURE, UNIT_TESTS]
+    for path in required:
+        check(path.exists() and path.stat().st_size > 0, f"decision artifact: {path.relative_to(REPO)}")
+
+    fixture = json.loads(text(FIXTURE))
+    check(fixture.get("evidence_mode") == "TEST_FIXTURE", "fixture evidence mode")
+    check(fixture.get("response_mode") == "SCREEN_READER", "fixture response mode")
+    check(bool(fixture.get("evaluated_at")), "fixture evaluation time")
+    check(fixture.get("selected_candidate_id") == "A", "fixture selected candidate")
+    quote = fixture.get("quote", {})
+    check(quote.get("fact_type") == "TEST_OBSERVED", "fixture quote fact type")
+    check(bool(quote.get("evidence")), "fixture quote evidence")
+    candidates = fixture.get("candidates", [])
+    check(len(candidates) >= 3, "fixture candidate coverage")
+    check(
+        all(
+            item.get("quoted_total_fen") is None
+            or (
+                item.get("price_fact_type") == "TEST_OBSERVED"
+                and bool(item.get("price_evidence"))
+                and item.get("price_source_tool") == "calculate-price"
+                and item.get("price_freshness") == "CURRENT"
+                and bool(item.get("price_binding"))
+            )
+            for item in candidates
+        ),
+        "fixture candidate price evidence",
+    )
+    pricing_hashes = [
+        fixture.get("draft", {}).get("pricing_request_sha256"),
+        quote.get("binding", {}).get("pricing_request_sha256"),
+        *[
+            item.get("price_binding", {}).get("pricing_request_sha256")
+            for item in candidates
+            if item.get("quoted_total_fen") is not None
+        ],
+        *[
+            item.get("pricing_request_sha256")
+            for item in fixture.get("offer_comparison", {}).values()
+        ],
+        *[
+            item.get("pricing_basis_sha256")
+            for item in fixture.get("offer_comparison", {}).values()
+        ],
+    ]
+    check(
+        all(
+            isinstance(value, str)
+            and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+            for value in pricing_hashes
+        ),
+        "fixture exact pricing-request digests",
+    )
+    check(
+        quote.get("binding", {}).get("store_name")
+        and all(
+            item.get("price_binding", {}).get("store_name")
+            for item in candidates
+            if item.get("quoted_total_fen") is not None
+        ),
+        "fixture store display names",
+    )
+
+    core = text(CORE)
+    for marker in [
+        "GUIDE_ONLY_TOOLS",
+        "READ_TOOLS",
+        "TEST_FIXTURE",
+        "TOOL_OBSERVED",
+        "EQUIVALENT_BASKET",
+        "CHANGED_BASKET",
+        "binding_status",
+        "verified_saving_fen",
+        "selected_candidate_id",
+        "price_binding_status",
+        "display_deltas",
+        "communication_card",
+        "SCREEN_READER",
+        "pricing_request_sha256",
+        "pricing_request_changed",
+        "FULFILLMENT_LABELS",
+        "DIFFERENT_PRICING_REQUEST",
+    ]:
+        check(marker in core, f"decision core contains {marker}")
+    check(
+        all(name in core for name in WRITE_NAMES),
+        "decision core contains seven state-changing tools",
+    )
+    check(
+        all(name in core for name in EXPECTED_NAMES),
+        "decision core contains exact 35-tool allowlist",
+    )
+    check(
+        all(marker not in core for marker in ["import requests", "import urllib", "import socket"]),
+        "decision core has no network dependency",
+    )
+    runtime_skill = text(SKILL_DIR / "SKILL.md")
+    accessible_modes = text(ACCESSIBLE_MODES)
+    requirements_text = text(REQUIREMENTS)
+    check(
+        all(
+            marker in content
+            for marker, content in [
+                ("【报价核对｜尚未下单】", runtime_skill),
+                ("【沟通卡｜请协助核对｜尚未下单】", runtime_skill),
+                ("【沟通卡｜请协助核对｜尚未下单】", accessible_modes),
+                ("希望避开（待确认）", core),
+                ("希望避开（待确认）", runtime_skill),
+                ("请协助确认并避开", core),
+                ("请协助确认并避开", accessible_modes),
+                ("官方回执摘要", requirements_text),
+            ]
+        ),
+        "card templates and handoff scope stay synchronized",
+    )
+
+    tests = text(UNIT_TESTS)
+    test_count = len(re.findall(r"^\s+def test_", tests, flags=re.MULTILINE))
+    check(test_count == 66, "decision guard unit-test inventory")
+    check("display_name_change" in tests, "display name binding regression")
+    check("live_mode_rejects_fixture" in tests, "fixture/live isolation regression")
+    check("screen_reader_candidates_are_numbered" in tests, "screen-reader regression")
+    check("surrogate_character_is_rejected" in tests, "text injection regression")
+    check("complete_delivery_profile_can_be_bound" in tests, "fulfillment profile regression")
+    check("pricing_request_hash_requires_sha256" in tests, "pricing request digest regression")
+    check("pricing_request_change_is_visible" in tests, "pricing request comparison regression")
+    check("candidate_cannot_invent_hard_checks" in tests, "declared hard-constraint regression")
+    check("unknown_key_cannot_inject" in tests, "mapping-key injection regression")
+    check("hidden_pricing_request_change" in tests, "hidden pricing-request regression")
+    check("drive_through_and_group_delivery" in tests, "four-profile fulfillment regression")
+    check(
+        "minimum_public_details" in tests
+        and 'self.assertNotIn("FIXTURE_EXTRA"' in tests
+        and 'self.assertNotIn("FIXTURE_DRINK_WARM", render_text_report(report))' in tests
+        and "same_name_transaction_change" in tests
+        and 'name = _require_text(item.get("name"),' in core,
+        "public identifier minimization regression",
+    )
+    check("store_display_name_comes_from_current_quote" in tests, "store display binding regression")
+
+    unit_result = subprocess.run(
+        [sys.executable, "-X", "utf8", "-m", "unittest", "discover", "-s", "tests", "-v"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        check=False,
+    )
+    unit_output = unit_result.stdout + unit_result.stderr
+    check(
+        unit_result.returncode == 0 and "Ran 66 tests" in unit_output,
+        "decision guard unit tests execute",
+    )
+
+    cli_result = subprocess.run(
+        [
+            sys.executable,
+            "-X",
+            "utf8",
+            "-m",
+            "src.core.cli",
+            str(FIXTURE.relative_to(REPO)),
+            "--json",
+        ],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        check=False,
+    )
+    try:
+        cli_payload = json.loads(cli_result.stdout) if cli_result.returncode == 0 else {}
+    except json.JSONDecodeError:
+        cli_payload = {}
+    check(
+        cli_payload.get("ok") is True
+        and cli_payload.get("state") == "HANDOFF_READY"
+        and cli_payload.get("communication_card"),
+        "decision guard CLI executes",
+    )
 
 
 def validate_svg() -> None:
@@ -271,10 +468,22 @@ def validate_evidence_and_declaration() -> None:
     ]
     check(sum(item["id"] == "E18" for item in ledger) == 1, "E18 evidence entry")
     check(sum(item["id"] == "E20" for item in ledger) == 1, "E20 evidence entry")
+    check(sum(item["id"] == "E21" for item in ledger) == 1, "E21 evidence entry")
+    check(sum(item["id"] == "E22" for item in ledger) == 1, "E22 evidence entry")
+    check(sum(item["id"] == "E23" for item in ledger) == 1, "E23 evidence entry")
+    e24 = [item for item in ledger if item["id"] == "E24"]
+    check(
+        len(e24) == 1
+        and e24[0].get("fact") == "TEST_OBSERVED"
+        and "215/215" in e24[0].get("result", ""),
+        "E24 final evidence entry",
+    )
 
     requirements = json.loads(text(REQUIREMENTS))["requirements"]
     check(sum(item["id"] == "R23" for item in requirements) == 1, "R23 requirement entry")
     check(sum(item["id"] == "R24" for item in requirements) == 1, "R24 requirement entry")
+    check(sum(item["id"] == "R25" for item in requirements) == 1, "R25 requirement entry")
+    check(sum(item["id"] == "R26" for item in requirements) == 1, "R26 requirement entry")
 
     declaration = (REPO / "CONTEST_DECLARATION.md").read_bytes().replace(b"\r\n", b"\n")
     git_blob = hashlib.sha1(
@@ -286,6 +495,7 @@ def validate_evidence_and_declaration() -> None:
 def main() -> int:
     validate_contracts()
     validate_docs()
+    validate_decision_guard()
     validate_svg()
     validate_evidence_and_declaration()
 

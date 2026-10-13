@@ -153,13 +153,43 @@ Skill 可以生成：
 
 </details>
 
+## 一块真正能跑的决定权护栏
+
+```mermaid
+flowchart LR
+    A[一句日常话] --> B[可修改草稿]
+    B --> C{证据三态}
+    C -->|已确认| D[最多三个候选]
+    C -->|有冲突| E[说清冲突与最小调整]
+    C -->|待确认| F[保留未知与核实办法]
+    D --> G[同篮核价与预算检查]
+    E --> B
+    F --> D
+    G --> H[尚未下单报价卡]
+    H --> I[食客选择继续 修改 转官方渠道]
+```
+
+仓库现已提供零依赖本地核心：金额统一用整数分，报价身份绑定门店、四类履约画像、商品编码、数量、选项编码、优惠与调用方提供的核价请求摘要；商品、选项和门店同时保存编码与展示名，卡片优先采用本轮核价回执名称。地址标识、优惠标识和稳定摘要留在内部绑定，公开报告只写已绑定状态或数量。稳定约束标识把每条“必须、上限、避开”逐项连到候选证据；测试夹具与真实工具证据各走一条独立通道。同一场景、同一清单、同一核价比较基准、两份当前核价才展示“节省金额”，其余情况逐项展示场景、请求条件、增加、减少与总额差异。
+
+<details>
+<summary><strong>开发者：30 秒运行本地护栏</strong></summary>
+
+~~~bash
+python -X utf8 -m src.core.cli examples/accessible-order.fixture.json
+python -X utf8 -m unittest discover -s tests -v
+~~~
+
+当前结果：66 项 fixture 自动测试通过。测试证明本地决定逻辑在这些用例内成立；真实菜单、价格与供应继续以本轮 MCP 返回为准。输入契约见 [决定权护栏说明](.codebuddy/skills/manmandian/references/decision-contract.md)，四种无障碍回应策略见 [无障碍回应模式](.codebuddy/skills/manmandian/references/accessible-response-modes.md)。
+
+</details>
+
 ## 当前真实状态
 
 <p align="center">
   <img src="assets/manmandian-status-board.svg" alt="状态看板分为已经具备、仍需验证和边界说明。已经具备项目级 Skill、菜单查询流程、官方核价和未下单沟通卡；仍需完整运行、独立界面、辅助技术测试和完整上下文；交易走官方渠道、优惠由用户选择、个人 Token 仅服务本人、官方合作以书面授权为准" width="100%" />
 </p>
 
-最后核对：**2026-10-10（北京时间）**。
+最后核对：**2026-10-13（北京时间）**。
 
 <details>
 <summary><strong>展开查看完整能力表与证据边界</strong></summary>
@@ -170,10 +200,12 @@ Skill 可以生成：
 | MCP 连接配置 | 已提供示例 | mcp-config.example.json 只放环境变量占位符，真实 Token 仅保存在本机配置 |
 | 35 项 MCP 工具定义 | 已采集并交叉校验 | 名称、输入 Schema 与哈希全部对齐；本次采集用于元数据盘点，调用次数为 0 |
 | 门店 → 菜单 → 详情 → 优惠查询 → 核价 | 有限范围历史实测 | 证据台账记录了 2026-10-09 的只读调用；本轮 README 修订沿用历史证据，用户账号调用次数为零 |
-| 最多三个候选、预算护栏 | Skill 已定义 | 尚无自动化回归测试 |
-| “未下单”报价卡与沟通卡 | Skill 已定义 | 尚无独立 UI 或门店后台 |
+| 最多三个候选、预算护栏 | 本地核心与 fixture 已通过 66 项测试 | 真实 WorkBuddy 任务与辅助技术仍待复测 |
+| “未下单”报价卡与沟通卡 | 本地核心分别生成 | 选中候选、草稿指纹、候选核价、当前报价和硬约束冲突共同控制交接 |
+| 决定权护栏 | 已实现零依赖核心 | 覆盖整数分、稳定约束标识、证据隔离、三态约束、报价绑定、同篮比较、读屏候选与 7 项 `GUIDE_ONLY` |
 | 跨入口共享草稿 | 设计完成，未编码 | 目前只维持当前会话上下文，跨设备保存仍待实现 |
-| 大字、键盘、读屏界面 | 目标已定义，开发与实测待完成 | NVDA、VoiceOver、TalkBack 与 WCAG 验收列入下一阶段 |
+| 读屏友好文字 | 本地核心提供编号、数量、已确认、待确认与可说动作 | NVDA、VoiceOver、TalkBack 真实验收列入下一阶段 |
+| 大字、键盘与窄屏界面 | 目标已定义，开发与实测待完成 | WCAG 与多设备验收列入下一阶段 |
 | 创建订单、取消、付款、退款、取餐码 | 官方渠道承接 | 最终购买回到麦当劳官方渠道 |
 | 手语识别 | 研究准备中 | 合法模型、词表与真实共创评估条件齐备后再启用相机 |
 | 企业部署、门店后台、批量服务 | 需另行授权 | 当前聚焦流程设计价值，个人 Token 仅服务本人 |
@@ -290,10 +322,10 @@ Skill 可以生成：
 一份有效报价必须绑定：
 
 ~~~text
-门店 + 取餐方式 + 商品编码 + 数量 + 套餐选项 + 优惠 + 总价 + 核价时间
+门店 + 四类履约画像 + 商品编码 + 数量 + 套餐选项编码 + 优惠标识 + 调用方核价请求摘要
 ~~~
 
-任一项改变，状态从 VALID 变为 STALE；界面只展示最新有效报价。
+以上身份字段经过规范化后形成指纹；任一项改变，状态从 VALID 变为 STALE。总价、观察时间和新鲜度保存在指纹旁边：调用方根据本轮回执显式写入 CURRENT / EXPIRED / UNKNOWN，本地核心校验带时区时间、复核先后与状态联动。当前仓库尚在建设真实 MCP 适配器；现有核心只校验调用方摘要格式、绑定与变化关系，真实适配器完成后须从实际发出的完整核价请求计算摘要。
 
 ### 异常恢复
 
@@ -369,8 +401,15 @@ MM-helper/
 │       │   ├── scripts/validate_contracts.py
 │       │   └── references/
 │       │       ├── mcd-tool-router.md
-│       │       └── mcd-tool-contracts.json
+│       │       ├── mcd-tool-contracts.json
+│       │       ├── decision-contract.md
+│       │       └── accessible-response-modes.md
 │       └── manmandian-builder/
+├── src/core/
+│   ├── decision_guard.py
+│   └── cli.py
+├── examples/accessible-order.fixture.json
+├── tests/test_decision_guard.py
 ├── docs/
 │   ├── EVIDENCE_LEDGER.jsonl
 │   ├── MCP_CAPABILITY_MATRIX.md
@@ -393,17 +432,18 @@ MM-helper/
 - 核验比赛文件、官方声明、MCP 指南与服务规则。
 - 建立运行 Skill、35 工具分级路由、事实分层、证据台账和限制说明。
 - 记录有限范围的真实只读链路证据。
+- 建立零依赖决定权护栏与命令行演示，66 项 fixture 自动测试通过。
 - 完成视觉叙事版 README、四张卡通插画和五张 SVG 信息图。
 
 ### 下一步
 
-- 建立最小可运行演示与自动测试。
-- 实现会话草稿、整数分金额模型和报价失效状态机。
+- 在干净 WorkBuddy 环境复测 Skill 触发与完整只读任务。
+- 为当前会话草稿接入真实 MCP 适配层，并保留 fixture / live 证据隔离。
 - 实现键盘可达、读屏可读、大字与窄屏界面。
 - 用真实辅助技术与真实任务测试，记录每次结果与改进过程。
 - 手语与写操作将在条件成熟后进入开放评估。
 
-> 参赛说明要求源代码或可运行内容。本仓库已有可加载 Skill，但仍缺独立应用与自动测试；报名前补最小演示与 fixture 测试能降低复现和审核风险。
+> 参赛说明要求源代码或可运行内容。本仓库现有可加载 Skill、命令行演示与 fixture 自动测试；独立可访问界面、真实 WorkBuddy 端到端复测和辅助技术实测属于下一阶段。
 
 </details>
 
@@ -417,7 +457,8 @@ MM-helper/
 - [ ] CONTEST_DECLARATION.md 与官方原文逐字一致。
 - [ ] MCP_INTEGRATION.md 如实说明 Server、Tool、流程和价值。
 - [ ] mcp-config.example.json 只保留占位符，真实 Token 位于本机配置。
-- [ ] 最好补最小演示和测试，降低“只有文档”的风险。
+- [x] 本地决定权护栏、命令行演示与 fixture 自动测试已提供。
+- [ ] 在干净 WorkBuddy 环境完成一次真实只读主流程复测并脱敏留证。
 - [ ] 若申请 WorkBuddy 专项奖励，将 WorkBuddy 原生导出的真实、完整、脱敏上下文放入 workbuddy.md，并与结构化索引逐项对账。
 - [ ] 作者确认参赛资格；未满 18 岁者取得父母或法定监护人同意。
 - [ ] 在 2026-10-25 23:59（北京时间）前按最新模板报名。
@@ -433,6 +474,8 @@ git status --short
 git diff --check
 git diff
 python -X utf8 .codebuddy/skills/manmandian/scripts/validate_contracts.py
+python -X utf8 -m unittest discover -s tests -v
+python -X utf8 -m src.core.cli examples/accessible-order.fixture.json
 ~~~
 
 请逐个添加本次确认过的文件：
@@ -441,7 +484,7 @@ python -X utf8 .codebuddy/skills/manmandian/scripts/validate_contracts.py
 git add README.md MCP_INTEGRATION.md PROJECT_STATUS.md CONTEXT_HANDOFF.md DECISIONS.md
 git add LICENSE workbuddy.md THIRD_PARTY_NOTICES.md
 git add .codebuddy/skills/manmandian .codebuddy/skills/manmandian-builder .codebuddy/CODEBUDDY.md
-git add docs requirements.lock.json
+git add src tests examples docs requirements.lock.json .gitignore
 git add assets/manmandian-mcp-35-map.svg
 git diff --cached
 ~~~

@@ -10,6 +10,8 @@ node_modules/
 dist/
 build/
 coverage/
+__pycache__/
+*.py[cod]
 
 # 日志与私有证据
 logs/

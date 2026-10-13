@@ -12,7 +12,7 @@ description: 「慢慢点」项目开发技能——基于麦当劳中国 MCP �
 1. 读 `.codebuddy/rules/manmandian.md`（短规则）
 2. 读 `PROJECT_CONSTITUTION.md` → `PROJECT_STATUS.md` → `CONTEXT_HANDOFF.md` → 相关 `DECISIONS.md`
 3. 核对实际代码与 `docs/EVIDENCE_LEDGER.jsonl`，不轻信文档自述
-4. 需求索引：`requirements.lock.json`（R01–R24）
+4. 需求索引：`requirements.lock.json`（R01–R26）
 
 ## 硬约束（违者即为造假）
 
@@ -43,6 +43,8 @@ description: 「慢慢点」项目开发技能——基于麦当劳中国 MCP �
 - `references/delivery.md` — 逐文件交付合同与图文要求
 - `../manmandian/references/mcd-tool-router.md` — 35 项运行时工具的人类可读路由
 - `../manmandian/references/mcd-tool-contracts.json` — 35 项脱敏输入契约与快照校验信息
+- `../manmandian/references/decision-contract.md` — 三态候选、报价绑定、同篮优惠与本地决定权护栏
+- `../manmandian/references/accessible-response-modes.md` — 四种无障碍回应模式与中断恢复格式
 
 ## 每轮汇报格式
 

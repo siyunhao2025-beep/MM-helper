@@ -17,7 +17,7 @@
 - 35 项分为八条生活任务路线：28 项读取/时间/核价按用户意图调用，7 项状态变更采用 `WRITE_MODE=GUIDE_ONLY`；历史 E1–E6 只证明 6 项有限范围真实执行
 - 官方服务面向中国大陆地区（不含港澳台），Token 与个人会员账号绑定，仅限个人、非商业、正常频率的交互使用
 - `auto-bind-coupons`、`cancel-order`、`create-order`、`delivery-create-address`、`draw-lottery`、`mall-create-order`、`party-order-create` 只生成解释、依赖与确认摘要，最终动作由用户在官方渠道完成；个人 Token 不用于企业代客、批量或无人值守调用
-- 源代码 src/ 尚未建立（P1 任务）；运行 Skill 已重构，但 WorkBuddy 干净环境触发与完整任务仍待复测
+- `src/core/decision_guard.py` 已实现 35 工具代码级白名单、稳定硬约束、报价/候选/草稿/四类履约画像/调用方请求摘要绑定、读屏候选与两类卡片，并通过 66 项 fixture 测试；真实 MCP 适配器、独立可访问界面与 WorkBuddy 干净环境完整任务仍待 P1.2
 
 ## 有效工作流
 
@@ -25,7 +25,9 @@
 - 推送前：依次核对 `git status --short`、`git diff --check`、逐文件 diff 与暂存区；只添加本次文件，不提交 Token、个人数据、代理或缓存配置
 - 普通 main 分支：提交后安全同步 `origin/main` 再推送；Worktree 分支：`git push -u origin HEAD` 后创建 PR；禁止 force push
 - 机器专用的凭证管理、代理与锁文件故障只在本机排查，不写进公共操作说明
-- 本地开发与自动测试命令：待 src/ 建立后登记；现在没有，不编造
+- 本地业务测试：`python -X utf8 -m unittest discover -s tests -v`
+- 本地 CLI 演示：`python -X utf8 -m src.core.cli examples/accessible-order.fixture.json`
+- 全仓静态检查：`python -X utf8 .codebuddy/skills/manmandian/scripts/validate_contracts.py`
 
 ## 硬边界
 
