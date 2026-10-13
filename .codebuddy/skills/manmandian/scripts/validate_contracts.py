@@ -366,6 +366,7 @@ def validate_decision_guard() -> None:
     runtime_skill = text(SKILL_DIR / "SKILL.md")
     accessible_modes = text(ACCESSIBLE_MODES)
     requirements_text = text(REQUIREMENTS)
+    readme = text(README)
     check(
         all(
             marker in content
@@ -373,6 +374,7 @@ def validate_decision_guard() -> None:
                 ("【报价核对｜尚未下单】", runtime_skill),
                 ("【沟通卡｜请协助核对｜尚未下单】", runtime_skill),
                 ("【沟通卡｜请协助核对｜尚未下单】", accessible_modes),
+                ("【沟通卡｜请协助核对｜尚未下单】", readme),
                 ("希望避开（待确认）", core),
                 ("希望避开（待确认）", runtime_skill),
                 ("请协助确认并避开", core),

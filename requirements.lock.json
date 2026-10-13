@@ -1,6 +1,6 @@
 {
   "version": "1.2",
-  "generated": "2026-10-13T13:35:15+08:00",
+  "generated": "2026-10-13T13:40:47+08:00",
   "note": "状态词汇：DESIGNED / IMPLEMENTED / TESTED_FIXTURE / VERIFIED_LIVE_READ / VERIFIED_LIVE_WRITE / EXPERIMENTAL / BLOCKED / NOT_TESTED。本文件是需求追踪索引，不是完成证明；缺实现不删需求，缺证据不标成功。",
   "requirements": [
     {"id": "R01", "req": "项目身份和主目标不变", "source": "USER_PROVIDED", "impl": "IMPLEMENTED", "test": "NOT_TESTED", "evidence": "PROJECT_CONSTITUTION.md; .codebuddy/rules/manmandian.md", "acceptance": "恢复测试 H01/H10"},
